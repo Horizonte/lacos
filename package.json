@@ -1,0 +1,20 @@
+{
+  "name": "laravel",
+  "version": "0.0.1",
+  "description": "Usando Grunt com Laravel e Bootstrap",
+  "main": "Grntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elena-kolevska/grunt-laravel.git"
+  },
+  "keywords": [
+    "Laravel",
+    "Grunt",
+    "larave.com.br"
+  ],
+  "author": "Elena Kolevska",
+  "license": "BSD"
+}
