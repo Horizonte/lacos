@@ -25,14 +25,14 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="{{{ URL::route('admin.homeIn') }}}"><i class="glyphicon glyphicon-home"></i> Home</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-wrench"></i> Administração</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-wrench"></i> Administração <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li>{{ HTML::linkRoute('users.index', 'Usuários') }}</li>
 							<li>{{ HTML::linkRoute('groups.index', 'Grupos') }}</li>
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Minha Conta</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> Minha Conta <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li>{{ HTML::linkRoute('users.photo', 'Adicionar Foto') }}</li>
 							<li>{{ HTML::linkRoute('users.password', 'Trocar Senha') }}</li>

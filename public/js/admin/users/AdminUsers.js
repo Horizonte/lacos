@@ -55,10 +55,11 @@ function AdminUsers()
     });
 
     $('#submenu a').click(function(event){
-        var href = $(this).attr('href');
+        var href = $(this).attr('route');
         menu = $(this).attr('menu');
         $('#divContent').load(href, function(){
             $("#submenu li").toggleClass( 'active', false );
+            $("#"+menu).toggleClass( 'active', true );
             $("#"+menu).toggleClass( 'active', true );
         });
         return false;
