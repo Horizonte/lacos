@@ -56,8 +56,9 @@
 					<label class="col-md-2 control-label" for="cbxDepartament">Departamento</label>
 					<div class="col-md-4">
 						<select id="cbxGroup" name="cbxDepartament" class="form-control">
-							<option value="1">Option one</option>
-							<option value="2">Option two</option>
+							@foreach ($departaments as $departament)
+								<option value="{{{$departament->id}}}">{{{$departament->name}}}</option>
+							@endforeach
 						</select>
 					</div>
 				</div>
