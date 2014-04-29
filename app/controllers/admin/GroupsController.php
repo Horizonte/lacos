@@ -1,6 +1,12 @@
 <?php
 
-class GroupsController extends BaseController {
+namespace App\Controllers\Admin;
+
+use App\Models\Groups;
+use App\Services\Validators\GroupValidator;
+use Auth, BaseController, Form, Input, Redirect, Sentry, View, Notification;
+
+class GroupsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +15,7 @@ class GroupsController extends BaseController {
 	 */
 	public function index()
 	{
-        return View::make('groups.index');
+        return View::make('admin.groups.index')->with('groups', Groups::all());
 	}
 
 	/**
@@ -19,7 +25,7 @@ class GroupsController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('groups.create');
+        return View::make('admin.groups.create');
 	}
 
 	/**
@@ -29,7 +35,19 @@ class GroupsController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validation = new GroupValidator();
+
+		if ($validation->passes())
+		{
+			$groups = new Groups();
+			$groups->name = Input::get('name');
+			$groups->permissions = '{"admin":1}';
+			$groups->save();
+
+			Notification::success('Grupo cadastrado com sucesso.');
+			return Redirect::route('groups.index', $groups->id);			
+		}
+		return Redirect::back()->withInput()->withErrors($validation->errors);
 	}
 
 	/**
@@ -40,7 +58,7 @@ class GroupsController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('groups.show');
+        return View::make('admin.groups.show');
 	}
 
 	/**
@@ -51,7 +69,7 @@ class GroupsController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('groups.edit');
+        return View::make('admin.groups.edit');
 	}
 
 	/**

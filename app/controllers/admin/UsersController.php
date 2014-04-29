@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\Users;
 use App\Models\Departaments;
+use App\Services\Validators\UserValidator;
 use Auth, BaseController, Form, Input, Redirect, Sentry, View;
 
 class UsersController extends \BaseController 

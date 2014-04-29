@@ -19,8 +19,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
 {
     Route::get('home',				array('as' => 'admin.homeIn',		'uses' => 'App\Controllers\Admin\HomeInController@getHomeIn'));
     
-    Route::get('groups/index',		array('as' => 'groups.index',		'uses' => 'App\Controllers\Admin\UsersController'));
+    // ######## Groups
+    Route::get('groups',    		array('as' => 'groups.index',		'uses' => 'App\Controllers\Admin\GroupsController@index'));
+    Route::get('groups/create',     array('as' => 'groups.create',      'uses' => 'App\Controllers\Admin\GroupsController@create'));
+    Route::get('groups/destroy',    array('as' => 'groups.destroy',     'uses' => 'App\Controllers\Admin\GroupsController@destroy'));
+    Route::get('groups/edit',       array('as' => 'groups.edit',        'uses' => 'App\Controllers\Admin\GroupsController@edit'));
+    Route::get('groups/show',       array('as' => 'groups.show',        'uses' => 'App\Controllers\Admin\GroupsController@show'));
+    Route::post('groups/store',     array('as' => 'groups.store',       'uses' => 'App\Controllers\Admin\GroupsController@store'));
+    Route::get('groups/update',     array('as' => 'groups.update',      'uses' => 'App\Controllers\Admin\GroupsController@update'));
 
+    // ######## Users
     Route::get('users',				array('as' => 'users.index',		'uses' => 'App\Controllers\Admin\UsersController@index'));
     Route::get('users/create',		array('as' => 'users.create',		'uses' => 'App\Controllers\Admin\UsersController@create'));
     Route::get('users/destroy',		array('as' => 'users.destroy',		'uses' => 'App\Controllers\Admin\UsersController@destroy'));
@@ -28,6 +36,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
     Route::get('users/edit',		array('as' => 'users.edit',			'uses' => 'App\Controllers\Admin\UsersController@edit'));
     Route::get('users/password',	array('as' => 'users.password',		'uses' => 'App\Controllers\Admin\UsersController@password'));
     Route::get('users/show',		array('as' => 'users.show',			'uses' => 'App\Controllers\Admin\UsersController@show'));
-    Route::get('users/store',		array('as' => 'users.store',		'uses' => 'App\Controllers\Admin\UsersController@store'));
+    Route::post('users/store',		array('as' => 'users.store',		'uses' => 'App\Controllers\Admin\UsersController@store'));
     Route::get('users/update',		array('as' => 'users.update',		'uses' => 'App\Controllers\Admin\UsersController@update'));
 });

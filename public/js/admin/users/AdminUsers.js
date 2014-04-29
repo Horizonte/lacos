@@ -54,8 +54,10 @@ function AdminUsers()
         }
     });
 
-    $('#submenu a').click(function(event){
-        var href = $(this).attr('route');
+    var url_ =  $(location).attr('pathname');
+
+    /*$('#submenu a').click(function(event){
+        var href = $(this).attr('href');
         menu = $(this).attr('menu');
         $('#divContent').load(href, function(){
             $("#submenu li").toggleClass( 'active', false );
@@ -63,40 +65,42 @@ function AdminUsers()
             $("#"+menu).toggleClass( 'active', true );
         });
         return false;
-    });
+    });*/
 
-    if(menu == '')
+    if(url_ == '/admin/users/create')
+    {  
+        $("#submenu li").toggleClass( 'active', false );
+        $("#create").toggleClass( 'active', true );
+    }
+    else
     {  
         $("#submenu li").toggleClass( 'active', false );
         $("#users").toggleClass( 'active', true );
     }
 
 
-    // var Access = function(){
-    //     $('li').removeClass('.active');
-    //     alert('ops');
-    //     console.log(this);
-    //     $.ajax({
-    //         url: BaseUrl+"/admin/users/create",
-    //         context: document.body
-    //     }).done(function() {
+    var RecordUser = function(){
+        $('li').removeClass('.active');
+        alert('ops');
+        console.log(this);
+        $.ajax({
+            url: BaseUrl+"/admin/users/create",
+            context: document.body
+        }).done(function() {
             
-    //         //$( this ).addClass( "active" );
-    //     });
-    // };
+            //$( this ).addClass( "active" );
+        });
+    };
 
-    // var List = function(){
-    //     console.log(this);
-    //     $.ajax({
-    //         url: BaseUrl+"/admin/users/create",
-    //         context: document.body
-    //     }).done(function() {
-    //         $( this ).addClass( "active" );
-    //     });
-    // };
+    var ListUser = function(){
+    };
 
-    // AdminUsersActions = {
-    //     "Access" : Access,
-    //     "List"   : List
-    // };
+    var UpdateUser = function(){
+    };
+
+    AdminUsersActions = {
+        "RecordUser"    : RecordUser,
+        "ListUser"      : ListUser,
+        "UpdateUser"    : UpdateUser
+    };
 }

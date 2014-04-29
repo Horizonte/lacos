@@ -18,10 +18,13 @@ class SentrySeeder extends Seeder
 			'activated'		=> 1,
 		));
 
-		Sentry::getGroupProvider()->create(array(
-			'name'			=> 'Admin',
-			'permissions'	=> array('admin' => 1),
-		));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Admin', 		'permissions' => array('admin' => 1)));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Diretor', 		'permissions' => array('admin' => 1)));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Gerente', 		'permissions' => array('admin' => 1)));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Coordenador', 	'permissions' => array('admin' => 1)));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Supervisor', 	'permissions' => array('admin' => 1)));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Colaborador', 	'permissions' => array('admin' => 1)));
+		Sentry::getGroupProvider()->create(array('name'	=> 'Visitante', 	'permissions' => array('admin' => 1)));
 
 		$adminUser  = Sentry::getUserProvider()->findByLogin('admin@lacos.com.br');
 		$adminGroup = Sentry::getGroupProvider()->findByName('Admin');
