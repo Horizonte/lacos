@@ -15,8 +15,7 @@ class UsersController extends \BaseController
 	 */
 	public function index()
 	{
-		$departaments = Departaments::all();
-        return View::make('admin.users.index', array('departaments' => $departaments))->with('users', Users::all());
+        return View::make('admin.users.index')->with('users', Users::all());
 	}
 
 	/**
@@ -26,7 +25,9 @@ class UsersController extends \BaseController
 	 */
 	public function create()
 	{
-        return View::make('admin.users.create');
+		$Departaments = new Departaments();
+		$departaments = $Departaments->getDepartaments();
+        return View::make('admin.users.create')->with('departaments', $departaments);
 	}
 
 	/**
