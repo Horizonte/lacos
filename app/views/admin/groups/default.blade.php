@@ -2,7 +2,7 @@
 
 @section('content')	
 	{{ HTML::style('css/admin/groups/AdminGroups.css') }}
-	@yield('contentUsers')
+	@yield('contentGroups')
 @stop
 
 @section('javascript')

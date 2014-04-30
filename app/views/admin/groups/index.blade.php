@@ -1,6 +1,6 @@
 @extends('admin.groups.default')
 
-@section('contentUsers')	
+@section('contentGroups')	
 	
 	<div id="listUser" class='container'>
 		<div id="divHeader" class="page-header">

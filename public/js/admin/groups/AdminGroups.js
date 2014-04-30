@@ -67,6 +67,26 @@ function AdminGroups()
         $("#groups").toggleClass( 'active', true );
     }
 
+    var RecordGroup = function()
+    {
+        console.log('ops');
+        $("#addGroup").submit(function(event){
+            event.preventDefault();
+            var url = BaseUrl + '/admin/groups/create';
+            console.log(url);
+            $.post(
+                url,
+                $("#addGroup").serialize(),
+                function(data)
+                {
+                    alert(data.msg);
+                    setTimeout(function(){ location.href = "/admin/groups/create"; }, 4000);
+                },
+                'json'
+            );
+        });
+    };
+
     var ListGroup = function(){
     };
 
@@ -74,6 +94,7 @@ function AdminGroups()
     };
 
     AdminGroupsActions = {
+        "RecordGroup"    : RecordGroup,
         "ListGroup"      : ListGroup,
         "UpdateGroup"    : UpdateGroup
     };

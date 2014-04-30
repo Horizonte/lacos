@@ -1,6 +1,6 @@
 @extends('admin.groups.default')
 
-@section('contentUsers')	
+@section('contentGroups')	
 	
 	<div id="recordUser" class='container'>
 		<div id="divHeader" class="page-header">
@@ -11,7 +11,7 @@
 		<div>
 			<br />
 			@include('admin._partials.notifications')
-			{{Form::open(array('route' => 'groups.store', 'class' => 'form-horizontal'))}}
+			<form id="addGroup" name="addGroup" class="form-horizontal">
 				<fieldset>
 					<!-- Text input-->
 					<div class="form-group">
@@ -25,13 +25,14 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="btSave"></label>
 						<div class="col-md-4">
-							<!-- <input type="submit" id="btSave" name="btSave" class="btn btn-info" value="Salvar" /> -->
-							<buttom type="submit" id="btSave" name="btSave" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i> Salvar</buttom>
-							<a id="btCancel" name="btCancel" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>
+							<!-- <buttom type="submit" id="btSave" name="btSave" class="btn btn-info" onclick="AdminGroupsActions.RecordGroup();" form="addGroup"><i class="glyphicon glyphicon-ok"></i> Salvar</buttom> -->
+							<!-- <a id="btCancel" name="btCancel" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</a> -->
+							<input type="submit" id="btSave" name="btSave" class="btn btn-info" onclick="AdminGroupsActions.RecordGroup();" value="Salvar" />
+							<a id="btCancel" name="btCancel" class="btn btn-danger">Cancelar</a>
 						</div>
 					</div>
 				</fieldset>
-			{{Form::close()}}
+			</form>
 	    </div>
 	</div>	
 

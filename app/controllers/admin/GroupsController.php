@@ -36,6 +36,8 @@ class GroupsController extends \BaseController {
 	 */
 	public function store()
 	{
+		header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
 		$validation = new GroupValidator();
 
 		if ($validation->passes())
@@ -45,10 +47,16 @@ class GroupsController extends \BaseController {
 			$groups->permissions = '{"admin":1}';
 			$groups->save();
 
-			Notification::success('Grupo cadastrado com sucesso.');
-			return Redirect::route('groups.create');			
+			$dataReturn = array('success' => true, 'msg' => 'Grupo cadastrado com sucesso.');
+			echo json_encode($dataReturn);
+			exit();			
+			/*Notification::success('Grupo cadastrado com sucesso.');
+			return Redirect::route('groups.create');*/			
 		}
-		return Redirect::back()->withInput()->withErrors($validation->errors);
+		//return Redirect::back()->withInput()->withErrors($validation->errors);
+		$dataReturn = array('false' => true, 'msg' => $validation->errors);
+		echo json_encode($dataReturn);
+		exit();
 	}
 
 	/**
