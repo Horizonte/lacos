@@ -36,7 +36,7 @@
 								<td><a href="{{{ URL::route('users.show', $user->id) }}}">{{{ $user->last_name }}}</a></td>
 								<td><a href="{{{ URL::route('users.show', $user->id) }}}">{{{ $user->email }}}</a></td>						
 								<td><a href="{{{ URL::route('users.show', $user->id) }}}">{{{ date('d/m/Y H:i:s', strtotime($user->created_at)) }}}</a></td>							
-								<td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="{{{ URL::route('users.edit', $user->id) }}}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+								<td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="{{{ URL::route('users.edit', $user->id) }}}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-edit"></span></button></p></td>
 	    						<td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="{{{ URL::route('users.destroy', $user->id) }}}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 							</tr>
 						@endforeach

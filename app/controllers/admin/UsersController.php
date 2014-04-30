@@ -27,7 +27,7 @@ class UsersController extends \BaseController
 	public function create()
 	{
 		$Departaments = new Departaments();
-		$departaments = $Departaments->getDepartaments();
+		$departaments = $Departaments->getDepartamentsCombobox();
         return View::make('admin.users.create')->with('departaments', $departaments);
 	}
 

@@ -9,7 +9,7 @@ class Departaments extends \Eloquent
 	protected $table = 'departaments';
 
 
-	public function getDepartaments()
+	public function getDepartamentsCombobox()
 	{
 		$rs = DB::table('departaments')->select('id','departament')->get();
 		return $rs;

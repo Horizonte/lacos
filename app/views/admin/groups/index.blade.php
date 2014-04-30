@@ -1,4 +1,4 @@
-@extends('admin.users.default')
+@extends('admin.groups.default')
 
 @section('contentUsers')	
 	
@@ -33,13 +33,14 @@
 								<td><a href="{{{ URL::route('groups.show', $group->id) }}}">{{{ $group->id }}}</a></td>
 								<td><a href="{{{ URL::route('groups.show', $group->id) }}}">{{{ $group->name }}}</a></td>			
 								<td><a href="{{{ URL::route('groups.show', $group->id) }}}">{{{ date('d/m/Y H:i:s', strtotime($group->created_at)) }}}</a></td>							
-								<td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="{{{ URL::route('groups.edit', $group->id) }}}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+								<td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="{{{ URL::route('groups.edit', $group->id) }}}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-edit"></span></button></p></td>
 	    						<td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="{{{ URL::route('groups.destroy', $group->id) }}}" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 							</tr>
 						@endforeach
 	                </tbody>
 	            </table>
 	        </div>
+			<div align="center">{{$groups->links()}}</div>
 	    </div>
     </div>
 

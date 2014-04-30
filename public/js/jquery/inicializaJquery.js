@@ -4,4 +4,5 @@ $(document).ready(function()
 {
 	if(typeof AdminLogin == 'function') { AdminLogin(); } 
 	else if(typeof AdminUsers == 'function') { AdminUsers(); } 
+	else if(typeof AdminGroups == 'function') { AdminGroups(); } 
 });

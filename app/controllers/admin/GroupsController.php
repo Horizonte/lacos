@@ -15,7 +15,8 @@ class GroupsController extends \BaseController {
 	 */
 	public function index()
 	{
-        return View::make('admin.groups.index')->with('groups', Groups::all());
+		$groups = new Groups();
+        return View::make('admin.groups.index')->with('groups', $groups->getGroupsList());
 	}
 
 	/**
@@ -45,7 +46,7 @@ class GroupsController extends \BaseController {
 			$groups->save();
 
 			Notification::success('Grupo cadastrado com sucesso.');
-			return Redirect::route('groups.index', $groups->id);			
+			return Redirect::route('groups.create');			
 		}
 		return Redirect::back()->withInput()->withErrors($validation->errors);
 	}
