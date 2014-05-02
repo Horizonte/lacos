@@ -6,5 +6,6 @@
 @stop
 
 @section('javascript')
+	{{ HTML::script('bootstrap-3.1.1/js/modal.js') }}
 	{{ HTML::script('js/admin/groups/AdminGroups.js') }}
 @stop

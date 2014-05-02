@@ -47,14 +47,14 @@ class GroupsController extends \BaseController {
 			$groups->permissions = '{"admin":1}';
 			$groups->save();
 
-			$dataReturn = array('success' => true, 'msg' => 'Grupo cadastrado com sucesso.');
+			$dataReturn = array('success' => true);
 			echo json_encode($dataReturn);
 			exit();			
-			/*Notification::success('Grupo cadastrado com sucesso.');
-			return Redirect::route('groups.create');*/			
 		}
-		//return Redirect::back()->withInput()->withErrors($validation->errors);
-		$dataReturn = array('false' => true, 'msg' => $validation->errors);
+		$message = array('Grupo não cadastrado');
+		$errors = json_decode($validation->errors);
+		foreach ($errors as $key => $value){ $message = $value; }
+		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
 		echo json_encode($dataReturn);
 		exit();
 	}

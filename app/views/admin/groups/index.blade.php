@@ -43,5 +43,5 @@
 			<div align="center">{{$groups->links()}}</div>
 	    </div>
     </div>
-
+	@include('admin.groups.edit')
 @stop

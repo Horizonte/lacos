@@ -67,35 +67,49 @@ function AdminGroups()
         $("#groups").toggleClass( 'active', true );
     }
 
-    var RecordGroup = function()
-    {
-        console.log('ops');
-        $("#addGroup").submit(function(event){
-            event.preventDefault();
-            var url = BaseUrl + '/admin/groups/create';
-            console.log(url);
+    function RecordGroup()
+    {       
+        var url = BaseUrl + '/admin/groups/create';
+        $.blockUI({ message: 'Aguarde...' });
+        setTimeout(function()
+        {
             $.post(
                 url,
                 $("#addGroup").serialize(),
                 function(data)
-                {
-                    alert(data.msg);
-                    setTimeout(function(){ location.href = "/admin/groups/create"; }, 4000);
+                {                        
+                    if(data.success)
+                    { 
+                        $.blockUI({ message: 'Cadastro realizado com sucesso.' });
+                        setTimeout(function(){ location.href = BaseUrl + "/admin/groups/create"; }, 3000); 
+                    }
+                    else
+                    { 
+                        $.blockUI({ message: 'Cadastro não realizado.' });
+                        $("#alerts").html('<div id="alerts" class="alert alert-danger">'+data.msg+'</div>');
+                        setTimeout($.unblockUI, 2000);
+                    }
                 },
                 'json'
             );
-        });
+        },1500);        
     };
 
-    var ListGroup = function(){
-    };
+    $("#addGroup").submit(function(event)
+    {
+        event.preventDefault();
+        RecordGroup();
+    });
 
-    var UpdateGroup = function(){
-    };
+    $("#btSave").click(function(event)
+    {
+        event.preventDefault();
+        RecordGroup();
+    });
 
-    AdminGroupsActions = {
-        "RecordGroup"    : RecordGroup,
-        "ListGroup"      : ListGroup,
-        "UpdateGroup"    : UpdateGroup
-    };
+    $('#myModal').on('show.bs.modal', function (e) {
+        //console.log(e);
+        //e.preventDefault() // stops modal from being shown
+    });
+
 }

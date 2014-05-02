@@ -81,8 +81,6 @@ function AdminUsers()
 
     var RecordUser = function(){
         $('li').removeClass('.active');
-        alert('ops');
-        console.log(this);
         $.ajax({
             url: BaseUrl+"/admin/users/create",
             context: document.body

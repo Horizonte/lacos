@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'lacos',
 			'username'  => 'root',
-			'password'  => '791321ch',
+			'password'  => 'Gemini06',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -10,7 +10,7 @@
 		</div>
 		<div>
 			<br />
-			@include('admin._partials.notifications')
+			<div id="alerts"></div>
 			<form id="addGroup" name="addGroup" class="form-horizontal">
 				<fieldset>
 					<!-- Text input-->
@@ -25,10 +25,8 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="btSave"></label>
 						<div class="col-md-4">
-							<!-- <buttom type="submit" id="btSave" name="btSave" class="btn btn-info" onclick="AdminGroupsActions.RecordGroup();" form="addGroup"><i class="glyphicon glyphicon-ok"></i> Salvar</buttom> -->
-							<!-- <a id="btCancel" name="btCancel" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Cancelar</a> -->
-							<input type="submit" id="btSave" name="btSave" class="btn btn-info" onclick="AdminGroupsActions.RecordGroup();" value="Salvar" />
-							<a id="btCancel" name="btCancel" class="btn btn-danger">Cancelar</a>
+							<buttom type="submit" id="btSave" name="btSave" class="btn btn-info" form="addGroup"><i class="glyphicon glyphicon-ok"></i> Salvar</buttom>
+							<a id="btCancel" name="btCancel" class="btn btn-danger" href="{{{URL::route('groups.index')}}}"><i class="glyphicon glyphicon-remove"></i> Cancelar</a>							
 						</div>
 					</div>
 				</fieldset>
