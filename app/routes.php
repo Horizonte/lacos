@@ -23,10 +23,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
     Route::get('groups',    		array('as' => 'groups.index',		'uses' => 'App\Controllers\Admin\GroupsController@index'));
     Route::get('groups/create',     array('as' => 'groups.create',      'uses' => 'App\Controllers\Admin\GroupsController@create'));
     Route::post('groups/create',    array('as' => 'groups.store',       'uses' => 'App\Controllers\Admin\GroupsController@store'));
-    Route::get('groups/destroy',    array('as' => 'groups.destroy',     'uses' => 'App\Controllers\Admin\GroupsController@destroy'));
     Route::get('groups/edit',       array('as' => 'groups.edit',        'uses' => 'App\Controllers\Admin\GroupsController@edit'));
+    Route::post('groups/edit',      array('as' => 'groups.update',      'uses' => 'App\Controllers\Admin\GroupsController@update'));
+    Route::get('groups/destroy',    array('as' => 'groups.destroy',     'uses' => 'App\Controllers\Admin\GroupsController@destroy'));
     Route::get('groups/show',       array('as' => 'groups.show',        'uses' => 'App\Controllers\Admin\GroupsController@show'));
-    Route::get('groups/update',     array('as' => 'groups.update',      'uses' => 'App\Controllers\Admin\GroupsController@update'));
 
     // ######## Users
     Route::get('users',				array('as' => 'users.index',		'uses' => 'App\Controllers\Admin\UsersController@index'));

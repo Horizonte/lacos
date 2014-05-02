@@ -73,12 +73,20 @@ class GroupsController extends \BaseController {
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-        return View::make('admin.groups.edit');
+        header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
+
+		$groups = new Groups();
+		$groups->id = isset($_GET['id']) ? $_GET['id'] : 0;
+		$rs = $groups->getDatasGroup();
+
+		$dataReturn = array('success' => true, 'datas' => $rs);
+		echo json_encode($dataReturn);
+		exit();
 	}
 
 	/**
@@ -87,9 +95,28 @@ class GroupsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
+		$validation = new GroupValidator();
+
+		if ($validation->passes())
+		{
+			$groups = Groups::find(Input::get('idEdit'));
+			$groups->name = Input::get('name');
+			$groups->save();
+
+			$dataReturn = array('success' => true);
+			echo json_encode($dataReturn);
+			exit();			
+		}
+		$message = array('Cadastro sem alteração.');
+		$errors = json_decode($validation->errors);
+		foreach ($errors as $key => $value){ $message = $value; }
+		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
+		echo json_encode($dataReturn);
+		exit();
 	}
 
 	/**

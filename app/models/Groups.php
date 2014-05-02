@@ -16,12 +16,12 @@ class Groups extends \Eloquent
 		return $rs;
 	}
 
-	public function getGroupsList($start='',$limit='')
+	public function getGroupsList($pageSize=10)
 	{
 		$rs = array();
 
-		if($this->id > 0){ $rs = DB::table('groups')->where('id','=',$this->id)->paginate(10); }
-		else{ $rs = DB::table('groups')->paginate(10); }
+		if($this->id > 0){ $rs = DB::table('groups')->where('id','=',$this->id)->paginate($pageSize); }
+		else{ $rs = DB::table('groups')->paginate($pageSize); }
 		return $rs;
 	}
 
@@ -29,5 +29,11 @@ class Groups extends \Eloquent
 	{
 		$total = DB::table('groups')->count();
 		return $total;
+	}
+
+	public function getDatasGroup()
+	{
+		$rs = DB::table('groups')->where('id', '=', $this->id)->get();
+		return $rs;
 	}
 }

@@ -85,7 +85,35 @@ function AdminGroups()
                     }
                     else
                     { 
-                        $.blockUI({ message: 'Cadastro não realizado.' });
+                        $.blockUI({ message: 'O cadastro não foi realizado.' });
+                        $("#alerts").html('<div id="alerts" class="alert alert-danger">'+data.msg+'</div>');
+                        setTimeout($.unblockUI, 2000);
+                    }
+                },
+                'json'
+            );
+        },1500);        
+    };
+
+    function UpdateGroup()
+    {       
+        var url = BaseUrl + '/admin/groups/edit';
+        $.blockUI({ message: 'Aguarde...' });
+        setTimeout(function()
+        {
+            $.post(
+                url,
+                $("#editGroup").serialize(),
+                function(data)
+                {                        
+                    if(data.success)
+                    { 
+                        $.blockUI({ message: 'Cadastro alterado com sucesso.' });
+                        setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 3000); 
+                    }
+                    else
+                    { 
+                        $.blockUI({ message: 'O cadastro não foi alterado.' });
                         $("#alerts").html('<div id="alerts" class="alert alert-danger">'+data.msg+'</div>');
                         setTimeout($.unblockUI, 2000);
                     }
@@ -107,9 +135,53 @@ function AdminGroups()
         RecordGroup();
     });
 
-    $('#myModal').on('show.bs.modal', function (e) {
-        //console.log(e);
-        //e.preventDefault() // stops modal from being shown
+    $("#editGroup").submit(function(event)
+    {
+        event.preventDefault();
+        UpdateGroup();
     });
 
+    $("#btUpdate").click(function(event)
+    {
+        event.preventDefault();
+        UpdateGroup();
+    });
+
+    var ShowEdit = function ModalEdit(id)
+    { 
+        $.ajax({
+            url: BaseUrl + '/admin/groups/edit',
+            data: {'id':id},
+            dataType: 'json',
+            tryCount:0,//current retry count
+            retryLimit:3,//number of retries on fail
+            timeout: 2000,//time before retry on fail
+            success: function(data) 
+            {
+                $("#idEdit").val(data.datas[0].id);
+                $("#name").val(data.datas[0].name);
+            },
+            error: function(xhr, textStatus, errorThrown) 
+            {
+                if (textStatus == 'timeout') {//if error is 'timeout'
+                    this.tryCount++;
+                    if (this.tryCount < this.retryLimit) {
+                        $.ajax(this);//try again
+                        return;
+                    }
+                }//try 3 times to get a response from server
+            }
+        }).done(function(){ $('#divEdit').modal(); });        
+    };
+
+    var ShowDelete = function ModalDelete(id)
+    { 
+        $('#divDelete').modal();
+        $("#idDelete").val(id);
+    };
+
+    Groups = {
+        "ShowEdit"   : ShowEdit,
+        "ShowDelete" : ShowDelete
+    };
 }
