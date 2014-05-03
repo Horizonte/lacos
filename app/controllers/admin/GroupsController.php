@@ -65,9 +65,18 @@ class GroupsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
-        return View::make('admin.groups.show');
+        header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
+
+		$groups = new Groups();
+		$groups->id = isset($_GET['id']) ? $_GET['id'] : 0;
+		$rs = $groups->getDatasGroup();
+
+		$dataReturn = array('success' => true, 'datas' => $rs);
+		echo json_encode($dataReturn);
+		exit();
 	}
 
 	/**

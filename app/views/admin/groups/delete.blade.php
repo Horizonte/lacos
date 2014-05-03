@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title custom_align" id="Heading">Exclusão de Registro</h4>
+                <h4 class="modal-title custom_align" id="Heading">Exclusão do Grupo</h4>
             </div>
             <div id="alertsDelete"></div>
             <form id="deleteGroup" name="deleteGroup" class="form-horizontal">

@@ -208,8 +208,35 @@ function AdminGroups()
         $("#idDelete").val(id);
     };
 
+    var ShowData = function ModalEdit(id)
+    { 
+        $.ajax({
+            url: BaseUrl + '/admin/groups/show',
+            data: {'id':id},
+            dataType: 'json',
+            tryCount:0,//current retry count
+            retryLimit:3,//number of retries on fail
+            timeout: 2000,//time before retry on fail
+            success: function(data) 
+            {
+                $("#nameGrupo").val(data.datas[0].name);
+            },
+            error: function(xhr, textStatus, errorThrown) 
+            {
+                if (textStatus == 'timeout') {//if error is 'timeout'
+                    this.tryCount++;
+                    if (this.tryCount < this.retryLimit) {
+                        $.ajax(this);//try again
+                        return;
+                    }
+                }//try 3 times to get a response from server
+            }
+        }).done(function(){ $('#divShow').modal(); });        
+    };
+
     Groups = {
         "ShowEdit"   : ShowEdit,
-        "ShowDelete" : ShowDelete
+        "ShowDelete" : ShowDelete,
+        "ShowData"   : ShowData
     };
 }
