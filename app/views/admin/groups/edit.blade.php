@@ -5,8 +5,8 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title" id="editLabel">Atualização dos Dados</h4>
         </div>
-        <div id="alerts"></div>
-        <form id="editGroup" name="addGroup" class="form-horizontal">
+        <div id="alertsUpdade"></div>
+        <form id="editGroup" name="editGroup" class="form-horizontal">
             <div class="modal-body">
                 <fieldset>
                     <!-- Text input-->

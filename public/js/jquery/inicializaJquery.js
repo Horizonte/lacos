@@ -13,7 +13,7 @@ $(document).ready(function()
         width: '40%',		            
         top:            '40%', 
         left:           '30%', 
-        textAlign:      'center', 
+        textAlign:      'center',
     }; 
 
     // Todos os métodos jquery devem ser registrados aqui.

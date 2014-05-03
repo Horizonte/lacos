@@ -101,9 +101,10 @@ class GroupsController extends \BaseController {
 		header('Content-Type: application/json; charset=UTF8');
 		$validation = new GroupValidator();
 
-		if ($validation->passes())
+		$id = Input::get('idEdit');
+		if ($validation->passes() && $id > 0)
 		{
-			$groups = Groups::find(Input::get('idEdit'));
+			$groups = Groups::find($id);
 			$groups->name = Input::get('name');
 			$groups->save();
 
@@ -111,9 +112,15 @@ class GroupsController extends \BaseController {
 			echo json_encode($dataReturn);
 			exit();			
 		}
-		$message = array('Cadastro sem alteração.');
-		$errors = json_decode($validation->errors);
-		foreach ($errors as $key => $value){ $message = $value; }
+
+		$message = array('O cadastro não foi alterado.');
+		
+		if($id > 0)
+		{
+			$errors = json_decode($validation->errors);
+			foreach ($errors as $key => $value){ $message = $value; }
+		}
+
 		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
 		echo json_encode($dataReturn);
 		exit();
@@ -125,9 +132,26 @@ class GroupsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
+
+		$id = Input::get('idDelete');
+		if($id > 0)
+		{
+			$groups = Groups::destroy($id);
+
+			$dataReturn = array('success' => true);
+			echo json_encode($dataReturn);
+			exit();
+		}
+		
+		$message = array('O cadastro não foi excluído.');
+				
+		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
+		echo json_encode($dataReturn);
+		exit();
 	}
 
 }

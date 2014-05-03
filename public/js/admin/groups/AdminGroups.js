@@ -92,35 +92,55 @@ function AdminGroups()
                 },
                 'json'
             );
-        },1500);        
+        },1000);        
     };
 
     function UpdateGroup()
     {       
         var url = BaseUrl + '/admin/groups/edit';
-        $.blockUI({ message: 'Aguarde...' });
-        setTimeout(function()
-        {
-            $.post(
-                url,
-                $("#editGroup").serialize(),
-                function(data)
-                {                        
-                    if(data.success)
-                    { 
-                        $.blockUI({ message: 'Cadastro alterado com sucesso.' });
-                        setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 3000); 
-                    }
-                    else
-                    { 
-                        $.blockUI({ message: 'O cadastro não foi alterado.' });
-                        $("#alerts").html('<div id="alerts" class="alert alert-danger">'+data.msg+'</div>');
-                        setTimeout($.unblockUI, 2000);
-                    }
-                },
-                'json'
-            );
-        },1500);        
+        $.post(
+            url,
+            $("#editGroup").serialize(),
+            function(data)
+            {                        
+                if(data.success)
+                { 
+                    $("#alertsUpdade").show();
+                    $("#alertsUpdade").html('<div class="alert alert-success"><strong>Sucesso!</strong> A atualização foi realizada com sucesso.</div>');
+                    setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 1000); 
+                }
+                else
+                { 
+                    $("#alertsUpdade").show();
+                    $("#alertsUpdade").html('<div class="alert alert-danger">'+data.msg+'</div>');
+                }
+            },
+            'json'
+        );
+    };
+
+    function DeleteGroup()
+    {       
+        var url = BaseUrl + '/admin/groups/destroy';
+        $.post(
+            url,
+            $("#deleteGroup").serialize(),
+            function(data)
+            {
+                if(data.success)
+                {
+                    $("#alertsDelete").show();
+                    $("#alertsDelete").html('<div class="alert alert-success"><strong>Sucesso!</strong> A exclusão foi realizada com sucesso.</div>');
+                    setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 1000); 
+                }
+                else
+                {
+                    $("#alertsDelete").show();
+                    $("#alertsDelete").html('<div class="alert alert-danger">'+data.msg+'</div>');
+                }
+            },
+            'json'
+        );
     };
 
     $("#addGroup").submit(function(event)
@@ -147,8 +167,15 @@ function AdminGroups()
         UpdateGroup();
     });
 
+    $("#btDelete").click(function(event)
+    {
+        event.preventDefault();
+        DeleteGroup();
+    });
+
     var ShowEdit = function ModalEdit(id)
     { 
+        $("#alertsUpdade").hide();
         $.ajax({
             url: BaseUrl + '/admin/groups/edit',
             data: {'id':id},
@@ -176,6 +203,7 @@ function AdminGroups()
 
     var ShowDelete = function ModalDelete(id)
     { 
+        $("#alertsDelete").hide();
         $('#divDelete').modal();
         $("#idDelete").val(id);
     };
