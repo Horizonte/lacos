@@ -30,9 +30,9 @@
 	                <tbody>
 	                    @foreach ($groups as $group)
 							<tr>
-								<td><a href="#" onclick="Groups.ShowData({{{ $group->id }}});">{{{ $group->id }}}</a></td>
-								<td><a href="#" onclick="Groups.ShowData({{{ $group->id }}});">{{{ $group->name }}}</a></td>			
-								<td><a href="#" onclick="Groups.ShowData({{{ $group->id }}});">{{{ date('d/m/Y H:i:s', strtotime($group->created_at)) }}}</a></td>							
+								<td><a onclick="Groups.ShowData({{{ $group->id }}});">{{{ $group->id }}}</a></td>
+								<td><a onclick="Groups.ShowData({{{ $group->id }}});">{{{ $group->name }}}</a></td>			
+								<td><a onclick="Groups.ShowData({{{ $group->id }}});">{{{ date('d/m/Y H:i:s', strtotime($group->created_at)) }}}</a></td>							
 								<td><p><button onclick="Groups.ShowEdit({{{ $group->id }}});" class="btn btn-primary btn-xs" data-title="Edit" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     							<td><p><button onclick="Groups.ShowDelete({{{ $group->id }}});" class="btn btn-danger btn-xs" data-title="Delete" data-placement="top"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 							</tr>
@@ -43,7 +43,6 @@
 			<div align="center">{{$groups->links()}}</div>
 	    </div>
     </div>
-	@include('admin.groups.edit')
-	@include('admin.groups.delete')
-	@include('admin.groups.show')
+    <div id="otherViews"></div>
+	
 @stop

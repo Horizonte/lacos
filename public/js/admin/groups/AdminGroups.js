@@ -155,14 +155,15 @@ function AdminGroups()
         RecordGroup();
     });
 
-    $("#editGroup").submit(function(event)
+    $("#editGroup").on('submit', function(event)
     {
         event.preventDefault();
         UpdateGroup();
     });
 
-    $("#btUpdate").click(function(event)
+    $("#btUpdate").on('click', function(event)
     {
+        console.log(this);
         event.preventDefault();
         UpdateGroup();
     });
@@ -173,32 +174,18 @@ function AdminGroups()
         DeleteGroup();
     });
 
+    function LoadOtherViewsModal(href)
+    {
+        $('#otherViews').load(href, function(){
+            $('#divModal').modal();
+        });
+        return false;
+    }
+
     var ShowEdit = function ModalEdit(id)
     { 
-        $("#alertsUpdade").hide();
-        $.ajax({
-            url: BaseUrl + '/admin/groups/edit',
-            data: {'id':id},
-            dataType: 'json',
-            tryCount:0,//current retry count
-            retryLimit:3,//number of retries on fail
-            timeout: 2000,//time before retry on fail
-            success: function(data) 
-            {
-                $("#idEdit").val(data.datas[0].id);
-                $("#name").val(data.datas[0].name);
-            },
-            error: function(xhr, textStatus, errorThrown) 
-            {
-                if (textStatus == 'timeout') {//if error is 'timeout'
-                    this.tryCount++;
-                    if (this.tryCount < this.retryLimit) {
-                        $.ajax(this);//try again
-                        return;
-                    }
-                }//try 3 times to get a response from server
-            }
-        }).done(function(){ $('#divEdit').modal(); });        
+        href = BaseUrl + '/admin/groups/edit?id='+id;
+        LoadOtherViewsModal(href);
     };
 
     var ShowDelete = function ModalDelete(id)
@@ -208,30 +195,10 @@ function AdminGroups()
         $("#idDelete").val(id);
     };
 
-    var ShowData = function ModalEdit(id)
+    var ShowData = function ModalShow(id)
     { 
-        $.ajax({
-            url: BaseUrl + '/admin/groups/show',
-            data: {'id':id},
-            dataType: 'json',
-            tryCount:0,//current retry count
-            retryLimit:3,//number of retries on fail
-            timeout: 2000,//time before retry on fail
-            success: function(data) 
-            {
-                $("#nameGrupo").val(data.datas[0].name);
-            },
-            error: function(xhr, textStatus, errorThrown) 
-            {
-                if (textStatus == 'timeout') {//if error is 'timeout'
-                    this.tryCount++;
-                    if (this.tryCount < this.retryLimit) {
-                        $.ajax(this);//try again
-                        return;
-                    }
-                }//try 3 times to get a response from server
-            }
-        }).done(function(){ $('#divShow').modal(); });        
+        href = BaseUrl + '/admin/groups/show?id='+id;
+        LoadOtherViewsModal(href);
     };
 
     Groups = {

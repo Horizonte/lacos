@@ -60,12 +60,12 @@ class GroupsController extends \BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Get data of the group
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function getDataGroupJson()
 	{
         header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');
@@ -80,22 +80,26 @@ class GroupsController extends \BaseController {
 	}
 
 	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show()
+	{
+		$id = isset($_GET['id']) ? $_GET['id'] : 0;
+        return View::make('admin.groups.show')->with('groupData', Groups::find($id));
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @return Response
 	 */
 	public function edit()
 	{
-        header('Content-type: text/json');
-		header('Content-Type: application/json; charset=UTF8');
-
-		$groups = new Groups();
-		$groups->id = isset($_GET['id']) ? $_GET['id'] : 0;
-		$rs = $groups->getDatasGroup();
-
-		$dataReturn = array('success' => true, 'datas' => $rs);
-		echo json_encode($dataReturn);
-		exit();
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+        return View::make('admin.groups.edit')->with('groupData', Groups::find($id));
 	}
 
 	/**

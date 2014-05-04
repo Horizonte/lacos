@@ -1,4 +1,4 @@
-<div class="modal fade" id="divShow" tabindex="-1" role="dialog" aria-labelledby="showLabel" aria-hidden="true">
+<div class="modal fade" id="divModal" tabindex="-1" role="dialog" aria-labelledby="showLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="name">Nome</label>  
                         <div class="col-md-9">
-                            <input id="nameGrupo" name="nameGrupo" type="text" placeholder="" class="form-control input-md" disabled="disabled" />
+                            {{Form::text('nameGrupo', $groupData->name, array('class' => 'form-control input-md', 'disabled' => 'disabled' ))}}
                         </div>
                     </div>                    
                 </fieldset>                
