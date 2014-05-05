@@ -14,7 +14,7 @@
                     <button type="submit" id="btDelete" name="btDelete" class="btn btn-warning" form="deleteGroup"><i class="glyphicon glyphicon-ok-sign"></i>  Sim</button>
                     <button type="button" class="btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Fechar</button>
                 </div>
-                <input type="hidden" id="idDelete" name="idDelete" value="0" />
+                {{Form::hidden('idDelete', $id)}}
             </form>
         </div>
         <!-- /.modal-content --> 

@@ -81,7 +81,7 @@ function AdminGroups()
                     if(data.success)
                     { 
                         $.blockUI({ message: 'Cadastro realizado com sucesso.' });
-                        setTimeout(function(){ location.href = BaseUrl + "/admin/groups/create"; }, 3000); 
+                        setTimeout(function(){ location.href = BaseUrl + "/admin/groups/create"; }, 2000); 
                     }
                     else
                     { 
@@ -98,6 +98,7 @@ function AdminGroups()
     function UpdateGroup()
     {       
         var url = BaseUrl + '/admin/groups/edit';
+        $("#divModal").block({ message: 'Aguarde...' });
         $.post(
             url,
             $("#editGroup").serialize(),
@@ -106,13 +107,15 @@ function AdminGroups()
                 if(data.success)
                 { 
                     $("#alertsUpdade").show();
-                    $("#alertsUpdade").html('<div class="alert alert-success"><strong>Sucesso!</strong> A atualização foi realizada com sucesso.</div>');
-                    setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 1000); 
+                    $("#divModal").block({ message: 'A atualização foi realizada com sucesso.' });
+                    setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 2000); 
                 }
                 else
                 { 
+                    $("#divModal").block({ message: 'O cadastro não foi realizado.' });
                     $("#alertsUpdade").show();
                     $("#alertsUpdade").html('<div class="alert alert-danger">'+data.msg+'</div>');
+                    setTimeout(function(){ $("#divModal").unblock();}, 2000);
                 }
             },
             'json'
@@ -122,6 +125,7 @@ function AdminGroups()
     function DeleteGroup()
     {       
         var url = BaseUrl + '/admin/groups/destroy';
+        $("#divModal").block({ message: 'Aguarde...' });
         $.post(
             url,
             $("#deleteGroup").serialize(),
@@ -130,13 +134,15 @@ function AdminGroups()
                 if(data.success)
                 {
                     $("#alertsDelete").show();
-                    $("#alertsDelete").html('<div class="alert alert-success"><strong>Sucesso!</strong> A exclusão foi realizada com sucesso.</div>');
+                    $("#divModal").block({ message: 'A exclusão foi realizada com sucesso.' });
                     setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 1000); 
                 }
                 else
                 {
+                    $("#divModal").block({ message: 'A exclusão não foi realizada.' });
                     $("#alertsDelete").show();
                     $("#alertsDelete").html('<div class="alert alert-danger">'+data.msg+'</div>');
+                    setTimeout(function(){ $("#divModal").unblock();}, 2000);
                 }
             },
             'json'
@@ -155,20 +161,13 @@ function AdminGroups()
         RecordGroup();
     });
 
-    $("#editGroup").on('submit', function(event)
+    $(document).on('submit', "#editGroup", function(event)
     {
         event.preventDefault();
         UpdateGroup();
     });
 
-    $("#btUpdate").on('click', function(event)
-    {
-        console.log(this);
-        event.preventDefault();
-        UpdateGroup();
-    });
-
-    $("#btDelete").click(function(event)
+    $(document).on('click', "#btDelete", function(event)
     {
         event.preventDefault();
         DeleteGroup();
@@ -190,9 +189,8 @@ function AdminGroups()
 
     var ShowDelete = function ModalDelete(id)
     { 
-        $("#alertsDelete").hide();
-        $('#divDelete').modal();
-        $("#idDelete").val(id);
+        href = BaseUrl + '/admin/groups/destroy?id='+id;
+        LoadOtherViewsModal(href);
     };
 
     var ShowData = function ModalShow(id)

@@ -25,6 +25,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
     Route::post('groups/create',    array('as' => 'groups.store',       'uses' => 'App\Controllers\Admin\GroupsController@store'));
     Route::get('groups/edit',       array('as' => 'groups.edit',        'uses' => 'App\Controllers\Admin\GroupsController@edit'));
     Route::post('groups/edit',      array('as' => 'groups.update',      'uses' => 'App\Controllers\Admin\GroupsController@update'));
+    Route::get('groups/destroy',    array('as' => 'groups.delete',      'uses' => 'App\Controllers\Admin\GroupsController@delete'));
     Route::post('groups/destroy',   array('as' => 'groups.destroy',     'uses' => 'App\Controllers\Admin\GroupsController@destroy'));
     Route::get('groups/show',       array('as' => 'groups.show',        'uses' => 'App\Controllers\Admin\GroupsController@show'));
 

@@ -137,6 +137,17 @@ class GroupsController extends \BaseController {
 		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
 		echo json_encode($dataReturn);
 		exit();
+	}	
+
+	/**
+	 * Show the form of message for deleting the specified resource.
+	 *
+	 * @return Response
+	 */
+	public function delete()
+	{
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
+        return View::make('admin.groups.delete')->with('id', $id);
 	}
 
 	/**
