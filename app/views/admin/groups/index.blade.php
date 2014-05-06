@@ -2,7 +2,7 @@
 
 @section('contentGroups')	
 	
-	<div id="listUser" class='container'>
+	<div id="listGroup" class='container'>
 		<div id="divHeader" class="page-header">
 			<div style="float:left"><h2>Grupos de Usuários</h2></div>
 			<div style="float:right; margin-top:21px;">@include('admin.groups.submenu')</div>
