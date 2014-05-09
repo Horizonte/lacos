@@ -27,8 +27,9 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-wrench"></i> Administração <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="{{{ URL::route('users.index') }}}"><i class="glyphicon glyphicon-user"></i> Usuários</a></li>
 							<li><a href="{{{ URL::route('groups.index') }}}"><i class="glyphicon glyphicon-link"></i> Grupos</a></li>
+							<li><a href="{{{ URL::route('menus.index') }}}"><i class="glyphicon glyphicon-link"></i> Menus</a></li>
+							<li><a href="{{{ URL::route('users.index') }}}"><i class="glyphicon glyphicon-user"></i> Usuários</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">

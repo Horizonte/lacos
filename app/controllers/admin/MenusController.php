@@ -2,11 +2,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Models\Groups;
-use App\Services\Validators\GroupValidator;
+use App\Models\Menus;
+use App\Services\Validators\MenuValidator;
 use Auth, BaseController, Form, Input, Redirect, Sentry, View, Notification;
 
-class GroupsController extends \BaseController {
+class MenusController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -15,8 +15,8 @@ class GroupsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$groups = new Groups();
-        return View::make('admin.groups.index')->with('groups', $groups->getGroupsList());
+		$menus = new Menus();
+        return View::make('admin.menus.index')->with('menus', $menus->getMenusList());
 	}
 
 	/**
@@ -26,7 +26,7 @@ class GroupsController extends \BaseController {
 	 */
 	public function create()
 	{
-        return View::make('admin.groups.create');
+        return View::make('admin.menus.create');
 	}
 
 	/**
@@ -42,10 +42,10 @@ class GroupsController extends \BaseController {
 
 		if ($validation->passes())
 		{
-			$groups = new Groups();
-			$groups->name = Input::get('name');
-			$groups->permissions = '{"admin":1}';
-			$groups->save();
+			$menus = new Menus();
+			$menus->name = Input::get('name');
+			$menus->permissions = '{"admin":1}';
+			$menus->save();
 
 			$dataReturn = array('success' => true);
 			echo json_encode($dataReturn);
@@ -70,9 +70,9 @@ class GroupsController extends \BaseController {
         header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');
 
-		$groups = new Groups();
-		$groups->id = isset($_GET['id']) ? $_GET['id'] : 0;
-		$rs = $groups->getDatasGroup();
+		$menus = new Menus();
+		$menus->id = isset($_GET['id']) ? $_GET['id'] : 0;
+		$rs = $menus->getDatasGroup();
 
 		$dataReturn = array('success' => true, 'datas' => $rs);
 		echo json_encode($dataReturn);
@@ -88,7 +88,7 @@ class GroupsController extends \BaseController {
 	public function show()
 	{
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
-        return View::make('admin.groups.show')->with('groupData', Groups::find($id));
+        return View::make('admin.menus.show')->with('groupData', Menus::find($id));
 	}
 
 	/**
@@ -99,7 +99,7 @@ class GroupsController extends \BaseController {
 	public function edit()
 	{
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        return View::make('admin.groups.edit')->with('groupData', Groups::find($id));
+        return View::make('admin.menus.edit')->with('groupData', Menus::find($id));
 	}
 
 	/**
@@ -112,14 +112,14 @@ class GroupsController extends \BaseController {
 	{
 		header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');
-		$validation = new GroupValidator();
+		$validation = new MenuValidator();
 
 		$id = Input::get('idEdit');
 		if ($validation->passes() && $id > 0)
 		{
-			$groups = Groups::find($id);
-			$groups->name = Input::get('name');
-			$groups->save();
+			$menus = Menus::find($id);
+			$menus->name = Input::get('name');
+			$menus->save();
 
 			$dataReturn = array('success' => true);
 			echo json_encode($dataReturn);
@@ -147,7 +147,7 @@ class GroupsController extends \BaseController {
 	public function delete()
 	{
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        return View::make('admin.groups.delete')->with('id', $id);
+        return View::make('admin.menus.delete')->with('id', $id);
 	}
 
 	/**
@@ -164,7 +164,7 @@ class GroupsController extends \BaseController {
 		$id = Input::get('idDelete');
 		if($id > 0)
 		{
-			$groups = Groups::destroy($id);
+			$menus = Menus::destroy($id);
 
 			$dataReturn = array('success' => true);
 			echo json_encode($dataReturn);
@@ -178,4 +178,10 @@ class GroupsController extends \BaseController {
 		exit();
 	}
 
+	public function filterMenus()
+	{
+		$menus = new Menus();
+		$menus->menu = (isset($_POST['txtSearch'])) ? $_POST['txtSearch'] : '';
+        return View::make('admin.menus.index')->with('menus', $menus->getMenusList());
+	}
 }

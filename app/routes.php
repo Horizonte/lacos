@@ -28,6 +28,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
     Route::get('groups/destroy',    array('as' => 'groups.delete',      'uses' => 'App\Controllers\Admin\GroupsController@delete'));
     Route::post('groups/destroy',   array('as' => 'groups.destroy',     'uses' => 'App\Controllers\Admin\GroupsController@destroy'));
     Route::get('groups/show',       array('as' => 'groups.show',        'uses' => 'App\Controllers\Admin\GroupsController@show'));
+    
+    // ######## Menus
+    Route::get('menus',             array('as' => 'menus.index',        'uses' => 'App\Controllers\Admin\MenusController@index'));
+    Route::post('menus',            array('as' => 'menus.index',        'uses' => 'App\Controllers\Admin\MenusController@filterMenus'));
+    Route::get('menus/create',      array('as' => 'menus.create',       'uses' => 'App\Controllers\Admin\MenusController@create'));
+    Route::post('menus/create',     array('as' => 'menus.store',        'uses' => 'App\Controllers\Admin\MenusController@store'));
+    Route::get('menus/edit',        array('as' => 'menus.edit',         'uses' => 'App\Controllers\Admin\MenusController@edit'));
+    Route::post('menus/edit',       array('as' => 'menus.update',       'uses' => 'App\Controllers\Admin\MenusController@update'));
+    Route::get('menus/destroy',     array('as' => 'menus.delete',       'uses' => 'App\Controllers\Admin\MenusController@delete'));
+    Route::post('menus/destroy',    array('as' => 'menus.destroy',      'uses' => 'App\Controllers\Admin\MenusController@destroy'));
+    Route::get('menus/show',        array('as' => 'menus.show',         'uses' => 'App\Controllers\Admin\MenusController@show'));
 
     // ######## Users
     Route::get('users',				array('as' => 'users.index',		'uses' => 'App\Controllers\Admin\UsersController@index'));

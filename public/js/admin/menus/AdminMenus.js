@@ -149,6 +149,16 @@ function AdminGroups()
         );
     };
 
+    function ListMenus()
+    {
+        var url = BaseUrl + 'admin/menus';
+        $("#divModal").block({ message: 'Aguarde...' });
+        $.post(
+            url,
+            $("#divList").serialize()
+        );
+    }
+
     $("#addGroup").submit(function(event)
     {
         event.preventDefault();
@@ -171,6 +181,12 @@ function AdminGroups()
     {
         event.preventDefault();
         DeleteGroup();
+    });
+
+    $("#btSearch").click(function(event)
+    {
+        event.preventDefault();
+        RecordGroup();
     });
 
     function LoadOtherViewsModal(href)

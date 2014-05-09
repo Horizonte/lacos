@@ -10,6 +10,21 @@
 		</div>
 		<div>
 			@include('admin._partials.notifications')
+			<br />
+			<form id="divList" class="form-horizontal">
+				<fieldset>
+					<!-- Appended Input-->
+					<div class="form-group">
+						<div class="col-md-6"></div>
+						<div class="col-md-6">
+							<div class="input-group">
+								<input id="textSearch" name="textSearch" class="form-control" placeholder="" type="text" required="">
+								<span id="btSearch" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+							</div>
+						</div>
+					</div>						
+				</fieldset>
+			</form>
 	        <div class="panel panel-primary filterable">
 	            <div class="panel-heading">
 	                <h3 class="panel-title">Menus</h3>
@@ -21,7 +36,9 @@
 	                <thead>
 	                    <tr class="filters">
 	                        <th>Código</th>
-	                        <th><input type="text" class="form-control" placeholder="Nome" disabled></th>
+	                        <th><input type="text" class="form-control" placeholder="Menu" disabled></th>
+	                        <th><input type="text" class="form-control" placeholder="Rota" disabled></th>
+	                        <th><input type="text" class="form-control" placeholder="Ativo" disabled></th>
 	                        <th><input type="text" class="form-control" placeholder="Criado em" disabled></th>
 	                        <th>Editar</th>
 	                        <th>Excluir</th>
@@ -31,8 +48,10 @@
 	                    @foreach ($menus as $menu)
 							<tr>
 								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->id }}}</a></td>
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->name }}}</a></td>			
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ date('d/m/Y H:i:s', strtotime($menu->created_at)) }}}</a></td>							
+								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->menu }}}</a></td>			
+								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->route }}}</a></td>			
+								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $confirm = ($menu->active == 1) ? 'Sim' : 'Não' }}}</a></td>			
+								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ date('d/m/Y H:i:s', strtotime($menu->created_at)) }}}</a></td>
 								<td><p><button onclick="Groups.ShowEdit({{{ $menu->id }}});" class="btn btn-primary btn-xs" data-title="Edit" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     							<td><p><button onclick="Groups.ShowDelete({{{ $menu->id }}});" class="btn btn-danger btn-xs" data-title="Delete" data-placement="top"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 							</tr>
