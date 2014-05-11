@@ -26,8 +26,8 @@
 	<!-- Scripts are placed here -->
     {{ HTML::script('js/jquery/jquery.min.js') }}
     {{ HTML::script('bootstrap-3.1.1/dist/js/bootstrap.min.js') }}
-    {{ HTML::script('js/jquery/inicializaJquery.js') }}
     {{ HTML::script('js/jquery/jquery.blockUI.min.js') }}
+    {{ HTML::script('js/jquery/inicializaJquery.js') }}
     @yield('javascript')
 </body>
 </html>

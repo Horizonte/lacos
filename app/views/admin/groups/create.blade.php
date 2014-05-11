@@ -17,7 +17,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="name">Nome</label>  
 						<div class="col-md-6">
-							<input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="Informe o nome do grupo.">
+							<input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
 						</div>
 					</div>
 

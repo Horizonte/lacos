@@ -22,25 +22,21 @@ class Menus extends \Eloquent
 
 		$where = '1=1';
 
-		if($this->id > 0){ $rs = DB::table('menus')->where('id','=',$this->id)->paginate($pageSize); }
-		if($this->menu != ''){ $rs = DB::select('select * from users where id = ?', array('value')); }
-
-		$sql = 'SELECT
-					users.id,
-					users.menu,
-					users.route,
-					users.active,
-					users.dir,
-					users.created_at,
-					users.update_at
-				FROM
-					users
-				WHERE
-					'.$where.'
-				ORDER BY
-					users.menu';
-
-		if{ $rs = DB::table('menus')->paginate($pageSize); }
+		if($this->id > 0){ $where.= ' AND menus.id = '.$this->id; }
+		if($this->menu != '')
+		{ 
+			$auxMenu = explode(' ', $this->menu);
+			$flagOr = false;
+			$where.= ' AND ('; 
+			foreach ($auxMenu as $key => $value) 
+			{
+				if($flagOr){ $where.= ' OR '; }
+				$where.= ' menus.menu LIKE ("%'.$value.'%")'; 
+				$flagOr = true;
+			}
+			$where.= ') ';
+		}
+		$rs = DB::table('menus')->whereRaw($where)->paginate($pageSize);
 		return $rs;
 	}
 

@@ -6,7 +6,7 @@
     margin-top: -15px; 
     margin-bottom: 2px;
 }
-#search{ cursor: pointer; }
+#btSearch{ cursor: pointer; }
 
 a{ cursor: pointer; }
 .page-header{ border-bottom: 1px solid #CCCCCC; }

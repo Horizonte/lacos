@@ -11,15 +11,15 @@
 		<div>
 			@include('admin._partials.notifications')
 			<br />
-			<form id="divList" class="form-horizontal">
+			<form id="listMenus" name="listMenus" class="form-horizontal">
 				<fieldset>
-					<!-- Appended Input-->
+					<!-- Appended Input -->
 					<div class="form-group">
 						<div class="col-md-6"></div>
 						<div class="col-md-6">
 							<div class="input-group">
-								<input id="textSearch" name="textSearch" class="form-control" placeholder="" type="text" required="">
-								<span id="btSearch" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								<input type="text" id="txtSearch" name="txtSearch" class="form-control" placeholder="Pesquisar">
+								<buttom type="submit" id="btSearch" name="btSearch" class="input-group-addon" form="listMenu"><i class="glyphicon glyphicon-search"></i></buttom>
 							</div>
 						</div>
 					</div>						

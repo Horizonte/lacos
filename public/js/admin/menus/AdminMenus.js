@@ -69,35 +69,49 @@ function AdminGroups()
 
     function RecordGroup()
     {       
-        var url = BaseUrl + '/admin/groups/create';
+        var url = BaseUrl + '/admin/menus/create';
+        var menu = $("#menu").val();
+        var route = $("#route").val();
+        var active = $("#active").val();
+        var dir = $("#dir").val();
         $.blockUI({ message: 'Aguarde...' });
-        setTimeout(function()
+        if(menu != '' && dir != '0')
         {
-            $.post(
-                url,
-                $("#addGroup").serialize(),
-                function(data)
-                {                        
-                    if(data.success)
-                    { 
-                        $.blockUI({ message: 'Cadastro realizado com sucesso.' });
-                        setTimeout(function(){ location.href = BaseUrl + "/admin/groups/create"; }, 2000); 
-                    }
-                    else
-                    { 
-                        $.blockUI({ message: 'O cadastro não foi realizado.' });
-                        $("#alerts").html('<div id="alerts" class="alert alert-danger">'+data.msg+'</div>');
-                        setTimeout($.unblockUI, 2000);
-                    }
-                },
-                'json'
-            );
-        },1000);        
+            setTimeout(function()
+            {
+                $.post(
+                    url,
+                    $("#addMenu").serialize(),
+                    function(data)
+                    {                        
+                        if(data.success)
+                        { 
+                            $.blockUI({ message: 'Cadastro realizado com sucesso.' });
+                            setTimeout(function(){ location.href = BaseUrl + "/admin/menus/create"; }, 2000); 
+                        }
+                        else
+                        { 
+                            $.blockUI({ message: 'O cadastro não foi realizado.' });
+                            $("#alerts").html('<div id="alerts" class="alert alert-danger">'+data.msg+'</div>');
+                            setTimeout($.unblockUI, 2000);
+                        }
+                    },
+                    'json'
+                );
+            },1000);
+        }
+        else
+        {
+            $.blockUI({ message: 'O cadastro não foi realizado.' });
+            if(menu == ''){ $("#alerts").html('<div id="alerts" class="alert alert-danger">Informe o menu</div>'); }
+            else if(dir == '0'){ $("#alerts").html('<div id="alerts" class="alert alert-danger">Informe o diretório</div>'); }            
+            setTimeout($.unblockUI, 2000);
+        }
     };
 
     function UpdateGroup()
     {       
-        var url = BaseUrl + '/admin/groups/edit';
+        var url = BaseUrl + '/admin/menus/edit';
         $("#divModal").block({ message: 'Aguarde...' });
         $.post(
             url,
@@ -124,7 +138,7 @@ function AdminGroups()
 
     function DeleteGroup()
     {       
-        var url = BaseUrl + '/admin/groups/destroy';
+        var url = BaseUrl + '/admin/menus/destroy';
         $("#divModal").block({ message: 'Aguarde...' });
         $.post(
             url,
@@ -151,27 +165,25 @@ function AdminGroups()
 
     function ListMenus()
     {
-        var url = BaseUrl + 'admin/menus';
-        $("#divModal").block({ message: 'Aguarde...' });
-        $.post(
-            url,
-            $("#divList").serialize()
-        );
+        var url = BaseUrl + '/admin/menus';
+        $.blockUI({ message: 'Aguarde...' });
+        $('body').load(url, $("#listMenus").serialize(), function(){ $.unblockUI(); });
+        return false;
     }
 
-    $("#addGroup").submit(function(event)
+    $(document).on("submit", "#addGroup", function(event)
     {
         event.preventDefault();
         RecordGroup();
     });
 
-    $("#btSave").click(function(event)
+    $(document).on("click", "#btSave", function(event)
     {
         event.preventDefault();
         RecordGroup();
     });
 
-    $(document).on('submit', "#editGroup", function(event)
+    $(document).on('submit', "#editMenu", function(event)
     {
         event.preventDefault();
         UpdateGroup();
@@ -183,10 +195,16 @@ function AdminGroups()
         DeleteGroup();
     });
 
+    $("#listMenu").submit(function(event)
+    {
+        event.preventDefault();
+        ListMenus();
+    });
+
     $("#btSearch").click(function(event)
     {
         event.preventDefault();
-        RecordGroup();
+        ListMenus();
     });
 
     function LoadOtherViewsModal(href)

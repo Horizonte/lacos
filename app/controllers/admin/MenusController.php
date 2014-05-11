@@ -16,6 +16,7 @@ class MenusController extends \BaseController {
 	public function index()
 	{
 		$menus = new Menus();
+		$menus->menu = (isset($_GET['txtSearch'])) ? $_GET['txtSearch'] : '';
         return View::make('admin.menus.index')->with('menus', $menus->getMenusList());
 	}
 
@@ -38,20 +39,22 @@ class MenusController extends \BaseController {
 	{
 		header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');
-		$validation = new GroupValidator();
+		$validation = new MenuValidator();
 
 		if ($validation->passes())
 		{
 			$menus = new Menus();
-			$menus->name = Input::get('name');
-			$menus->permissions = '{"admin":1}';
+			$menus->menu = Input::get('menu');
+			$menus->route = (Input::get('route') != '') ? Input::get('route') : '#';
+			$menus->active = (Input::get('active') != null) ? Input::get('active') : 0;
+			$menus->dir = Input::get('dir');
 			$menus->save();
 
 			$dataReturn = array('success' => true);
 			echo json_encode($dataReturn);
-			exit();			
+			exit();
 		}
-		$message = array('Grupo não cadastrado');
+		$message = array('Menu não cadastrado');
 		$errors = json_decode($validation->errors);
 		foreach ($errors as $key => $value){ $message = $value; }
 		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
@@ -72,7 +75,7 @@ class MenusController extends \BaseController {
 
 		$menus = new Menus();
 		$menus->id = isset($_GET['id']) ? $_GET['id'] : 0;
-		$rs = $menus->getDatasGroup();
+		$rs = $menus->getDatasMenu();
 
 		$dataReturn = array('success' => true, 'datas' => $rs);
 		echo json_encode($dataReturn);
@@ -88,7 +91,7 @@ class MenusController extends \BaseController {
 	public function show()
 	{
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
-        return View::make('admin.menus.show')->with('groupData', Menus::find($id));
+        return View::make('admin.menus.show')->with('menuData', Menus::find($id));
 	}
 
 	/**
@@ -99,7 +102,7 @@ class MenusController extends \BaseController {
 	public function edit()
 	{
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
-        return View::make('admin.menus.edit')->with('groupData', Menus::find($id));
+        return View::make('admin.menus.edit')->with('menuData', Menus::find($id));
 	}
 
 	/**
