@@ -63,12 +63,12 @@ class MenusController extends \BaseController {
 	}
 
 	/**
-	 * Get data of the group
+	 * Get data of the menu
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function getDataGroupJson()
+	public function getDataMenuJson()
 	{
         header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');

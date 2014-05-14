@@ -25,7 +25,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="name">Rota</label>  
 						<div class="col-md-6">
-							<input id="route" name="route" type="text" placeholder="" class="form-control input-md" required="">
+							<input id="route" name="route" type="text" placeholder="" class="form-control input-md" required="" value="#">
 						</div>
 					</div>
 					

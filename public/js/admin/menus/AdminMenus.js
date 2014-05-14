@@ -4,7 +4,7 @@ Please consider that the JS part isn't production ready at all, I just code it t
 
 var menu = '';
 
-function AdminGroups()
+function AdminMenus()
 {
     $('.filterable .btn-filter').click(function()
     {
@@ -56,7 +56,7 @@ function AdminGroups()
 
     var url_ =  $(location).attr('pathname');
                
-    if(url_ == '/admin/groups/create')
+    if(url_ == '/admin/menus/create')
     {  
         $("#submenu li").toggleClass( 'active', false );
         $("#create").toggleClass( 'active', true );
@@ -64,7 +64,7 @@ function AdminGroups()
     else
     {  
         $("#submenu li").toggleClass( 'active', false );
-        $("#groups").toggleClass( 'active', true );
+        $("#menus").toggleClass( 'active', true );
     }
 
     function RecordGroup()
@@ -122,7 +122,7 @@ function AdminGroups()
                 { 
                     $("#alertsUpdade").show();
                     $("#divModal").block({ message: 'A atualização foi realizada com sucesso.' });
-                    setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 2000); 
+                    setTimeout(function(){ location.href = BaseUrl + "/admin/menus"; }, 2000); 
                 }
                 else
                 { 
@@ -149,7 +149,7 @@ function AdminGroups()
                 {
                     $("#alertsDelete").show();
                     $("#divModal").block({ message: 'A exclusão foi realizada com sucesso.' });
-                    setTimeout(function(){ location.href = BaseUrl + "/admin/groups"; }, 1000); 
+                    setTimeout(function(){ location.href = BaseUrl + "/admin/menus"; }, 1000); 
                 }
                 else
                 {
@@ -217,23 +217,23 @@ function AdminGroups()
 
     var ShowEdit = function ModalEdit(id)
     { 
-        href = BaseUrl + '/admin/groups/edit?id='+id;
+        href = BaseUrl + '/admin/menus/edit?id='+id;
         LoadOtherViewsModal(href);
     };
 
     var ShowDelete = function ModalDelete(id)
     { 
-        href = BaseUrl + '/admin/groups/destroy?id='+id;
+        href = BaseUrl + '/admin/menus/destroy?id='+id;
         LoadOtherViewsModal(href);
     };
 
     var ShowData = function ModalShow(id)
     { 
-        href = BaseUrl + '/admin/groups/show?id='+id;
+        href = BaseUrl + '/admin/menus/show?id='+id;
         LoadOtherViewsModal(href);
     };
 
-    Groups = {
+    Menus = {
         "ShowEdit"   : ShowEdit,
         "ShowDelete" : ShowDelete,
         "ShowData"   : ShowData
