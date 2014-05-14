@@ -83,9 +83,9 @@ function AdminMenus()
                     url,
                     $("#addMenu").serialize(),
                     function(data)
-                    {                        
+                    {
                         if(data.success)
-                        { 
+                        {
                             $.blockUI({ message: 'Cadastro realizado com sucesso.' });
                             setTimeout(function(){ location.href = BaseUrl + "/admin/menus/create"; }, 2000); 
                         }
