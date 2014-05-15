@@ -7,7 +7,8 @@ $(document).ready(function()
         backgroundColor: '#000000', 
         '-webkit-border-radius': '10px', 
         '-moz-border-radius': '10px', 
-        opacity: .5, 
+        'border-radius': '10px', 
+        opacity: .9, 
         color: '#ffffff',
         fontSize: '20px',
         width: '40%',		            
@@ -19,5 +20,6 @@ $(document).ready(function()
     // Todos os métodos jquery devem ser registrados aqui.
 	if(typeof AdminLogin == 'function') { AdminLogin(); } 
 	else if(typeof AdminUsers == 'function') { AdminUsers(); } 
-	else if(typeof AdminGroups == 'function') { AdminGroups(); } 
+    else if(typeof AdminGroups == 'function') { AdminGroups(); } 
+	else if(typeof AdminMenus == 'function') { AdminMenus(); } 
 });
