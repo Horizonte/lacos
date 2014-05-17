@@ -55,7 +55,7 @@ function AdminMenus()
     });
 
     var url_ =  $(location).attr('pathname');
-               
+    
     if(url_ == '/admin/menus/create')
     {  
         $("#submenu li").toggleClass( 'active', false );
@@ -67,7 +67,7 @@ function AdminMenus()
         $("#menus").toggleClass( 'active', true );
     }
 
-    function RecordGroup()
+    function RecordMenu()
     {       
         var url = BaseUrl + '/admin/menus/create';
         var menu = $("#menu").val();
@@ -109,13 +109,13 @@ function AdminMenus()
         }
     };
 
-    function UpdateGroup()
+    function UpdateMenu()
     {       
         var url = BaseUrl + '/admin/menus/edit';
         $("#divModal").block({ message: 'Aguarde...' });
         $.post(
             url,
-            $("#editGroup").serialize(),
+            $("#editMenu").serialize(),
             function(data)
             {                        
                 if(data.success)
@@ -136,13 +136,13 @@ function AdminMenus()
         );
     };
 
-    function DeleteGroup()
+    function DeleteMenu()
     {       
         var url = BaseUrl + '/admin/menus/destroy';
         $("#divModal").block({ message: 'Aguarde...' });
         $.post(
             url,
-            $("#deleteGroup").serialize(),
+            $("#deleteMenu").serialize(),
             function(data)
             {
                 if(data.success)
@@ -171,28 +171,28 @@ function AdminMenus()
         return false;
     }
 
-    $(document).on("submit", "#addGroup", function(event)
+    $(document).on("submit", "#addMenu", function(event)
     {
         event.preventDefault();
-        RecordGroup();
+        RecordMenu();
     });
 
     $(document).on("click", "#btSave", function(event)
     {
         event.preventDefault();
-        RecordGroup();
+        RecordMenu();
     });
 
     $(document).on('submit', "#editMenu", function(event)
     {
         event.preventDefault();
-        UpdateGroup();
+        UpdateMenu();
     });
 
     $(document).on('click', "#btDelete", function(event)
     {
         event.preventDefault();
-        DeleteGroup();
+        DeleteMenu();
     });
 
     $("#listMenu").submit(function(event)
