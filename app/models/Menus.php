@@ -16,6 +16,15 @@ class Menus extends \Eloquent
 		return $rs;
 	}
 
+	public function getSubMenusCombobox()
+	{
+		$rs = DB::table('submenus')->select('id','submenu')
+								   ->where('menu_id', '=', $this->id)
+								   ->orderBy('submenu')
+								   ->get();
+		return $rs;
+	}
+
 	public function getMenusList($pageSize=10)
 	{
 		$rs = array();

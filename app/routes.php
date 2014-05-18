@@ -50,4 +50,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
     Route::get('users/show',		array('as' => 'users.show',			'uses' => 'App\Controllers\Admin\UsersController@show'));
     Route::post('users/store',		array('as' => 'users.store',		'uses' => 'App\Controllers\Admin\UsersController@store'));
     Route::get('users/update',		array('as' => 'users.update',		'uses' => 'App\Controllers\Admin\UsersController@update'));
+
+
+    // ################################################ BEGIN AJAX FORMS ADMIN ###################################################
+    
+    Route::post('menus/cbxMenus',           array('as' => 'menus.cbxMenus',             'uses' => 'App\Controllers\Admin\MenusController@cbxMenus'));
+    Route::post('menus/cbxSubmenus',        array('as' => 'menus.cbxSubmenus',          'uses' => 'App\Controllers\Admin\MenusController@cbxSubmenus'));
+
+    // ################################################ END AJAX FORMS ADMIN #####################################################
 });

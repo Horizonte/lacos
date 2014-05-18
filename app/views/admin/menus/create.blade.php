@@ -21,32 +21,48 @@
 								<input type="radio" name="nivel" id="nivel-0" value="0" checked="checked">Menu
 							</label> 
 							<label class="radio-inline" for="nivel-1">
-								<input type="radio" name="nivel" id="nivel-1" value="1">Sub-menu
+								<input type="radio" name="nivel" id="nivel-1" value="1">Submenu
 							</label> 
 							<label class="radio-inline" for="nivel-2">
-								<input type="radio" name="nivel" id="nivel-2" value="2">Sub-sub-menu
+								<input type="radio" name="nivel" id="nivel-2" value="2">Sub-submenu
 							</label>
 						</div>
 					</div>
 
 					<!-- Text input-->
-					<div class="form-group">
+					<div id="cmpMenu" class="form-group">
 						<label class="col-md-2 control-label" for="name">Menu</label>  
-						<div id="menu" class="col-md-6">
+						<div id="divMenu" class="col-md-6">
 							<input id="menu" name="menu" type="text" placeholder="" class="form-control input-md" required="">
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div id="cmpSubmenu" class="form-group" display="none">
+						<label class="col-md-2 control-label" for="name">Submenu</label>  
+						<div id="divSubmenu" class="col-md-6">
+							<input id="submenu" name="submenu" type="text" placeholder="" class="form-control input-md" required="">
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div id="cmpSubsubmenu" class="form-group" display="block">
+						<label class="col-md-2 control-label" for="name">Sub-Submenu</label>  
+						<div id="divSubsubmenu" class="col-md-6">
+							<input id="subsubmenu" name="subsubmenu" type="text" placeholder="" class="form-control input-md" required="">
 						</div>
 					</div>
 
 					<!-- Text input-->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="name">Rota</label>  
-						<div class="col-md-6">
+						<div id="divRota" class="col-md-6">
 							<input id="route" name="route" type="text" placeholder="" class="form-control input-md" required="" value="#">
 						</div>
 					</div>
 					
 					<!-- Multiple Checkboxes (inline) -->
-					<div class="form-group">
+					<div id="divAtivo" class="form-group">
 						<label class="col-md-2 control-label" for="chActive">Ativo</label>
 						<div class="col-md-6">
 							<input type="checkbox" name="active" id="active-0" value="1">
@@ -56,7 +72,7 @@
 					<!-- Select Basic -->
 					<div class="form-group">
 						<label class="col-md-2 control-label" for="cbxDir">Diretório</label>
-						<div class="col-md-2">
+						<div id="divDiretorio" class="col-md-2">
 							<select id="dir" name="dir" class="form-control">
 								<option value="0">Selecione</option>
 								<option value="admin">Admin</option>

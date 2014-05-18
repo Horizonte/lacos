@@ -21,3 +21,7 @@
 .filterable .filters input[disabled]:-ms-input-placeholder {
     color: #333;
 }
+
+#cmpMenu{ display: block; }
+#cmpSubmenu{ display: none; }
+#cmpSubsubmenu{ display: none; }
