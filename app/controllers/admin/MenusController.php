@@ -40,16 +40,65 @@ class MenusController extends \BaseController {
 		header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');
 
-		$menus = new Menus();
-		$menus->menu = Input::get('menu');
-		$menus->route = (Input::get('route') != '') ? Input::get('route') : '#';
-		$menus->active = (Input::get('active') != null) ? Input::get('active') : 0;
-		$menus->dir = Input::get('dir');
-		$menus->save();
+		$success = true;
+		$message = null;
 
-		$dataReturn = array('success' => true);
-			
-		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
+		if(Input::get('dir') != '0')
+		{
+			$menus = new Menus();
+			$menus->route = (Input::get('route') != '') ? Input::get('route') : '#';
+			$menus->active = (Input::get('active') != null) ? Input::get('active') : 0;
+			$menus->dir = Input::get('dir');
+
+			switch (Input::get('nivel')) 
+			{
+				case '0': // Insert a new menu
+					
+					$menus->menu = Input::get('menu');
+					$menus->save();
+					$success = true;
+
+					break;
+				
+				case '1': // Insert a new submenu
+					
+					if(strlen(trim(Input::get('submenu'))) == 0)
+					{  
+						$success = false;
+						$message = '<strong>Atenção!</strong> Informe o submenu.';
+						break;
+					}
+					if(Input::get('cbxMenu') == 0)
+					{
+						$success = false;
+						$message = '<strong>Atenção!</strong> Informe o menu.';
+						break;
+					}
+					$menus->submenu = Input::get('submenu');
+					$menus->id = Input::get('cbxMenu');
+					$menus->insertSubmenu();
+					$success = true;
+
+					break;
+				
+				case '2': // Insert a new sub-submenu
+					
+					$menus->submenu = Input::get('subsubmenu');
+					$menus->submenu_id = Input::get('cbxSubmenu');
+					$menus->insertSubSubmenu();
+					$success = true;
+
+					break;
+			}
+		}
+		else
+		{
+			$success = false;
+			$message = '<strong>Atenção!</strong> Informe o diretório.';
+		}
+		
+		$dataReturn = array('success' => $success, 'msg' => $message);	
+
 		echo json_encode($dataReturn);
 		exit();
 	}

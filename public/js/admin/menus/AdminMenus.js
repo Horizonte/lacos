@@ -57,6 +57,8 @@ function AdminMenus()
     // ################ Modificação de campos no form. ##################
 
     $(document).on("change", "#nivel-0", function(event){
+        var textMenu = '<input id="menu" name="menu" type="text" placeholder="" class="form-control input-md" required="">';
+        $("#divMenu").html(textMenu);
         $("#cmpSubmenu").hide();
         $("#cmpSubsubmenu").hide();
     });
@@ -105,7 +107,44 @@ function AdminMenus()
     });
 
     $(document).on("change", "#nivel-2", function(event){
-        var url = BaseUrl + '/admin/menus/cbxSubmenus';
+        var url = BaseUrl + '/admin/menus/cbxMenus';
+        $.post(
+            url,
+            function(data)
+            {
+                var menus = data.datas;
+                var cbx;
+
+                cbx = '<select id="cbxMenu" name="cbxMenu" class="form-control">';
+                cbx+= ' <option value="0">Selecione o Menu</option>';
+                for (i=0; i<menus.length; i++) 
+                {
+                    cbx+= ' <option value="'+menus[i].id+'">'+menus[i].menu+'</option>';
+                };
+                cbx+= '</select>';
+
+                $("#divMenu").html(cbx);
+            },
+            'json'
+        ).fail(function(){
+            var alert;
+            alert = '<div id="alerts" class="alert alert-warning">';
+            alert+= '<strong><i class="glyphicon glyphicon-info-sign"></i> Atenção!</strong> ';
+            alert+= 'Houve falha ao listar os menus.';
+            alert+= '</div>';
+            $("#alerts").html(alert);
+            $("#cmpSubmenu").hide();
+            $("#cmpSubsubmenu").hide();
+            setTimeout(function(){
+                $("#alerts").hide("slow");
+                $("#alerts").html("");
+                $("#alerts").show();
+            }, 3000);
+            location.href = '/admin/menus/create';
+        });
+
+
+        url = BaseUrl + '/admin/menus/cbxSubmenus';
         $.post(
             url,
             {"idMenu" : $("#menu").val()},
@@ -147,39 +186,44 @@ function AdminMenus()
     });
 
     $(document).on("change", "#cbxMenu", function(event){
-        var url = BaseUrl + '/admin/menus/cbxSubmenus';
-        $.post(
-            url,
-            {"idMenu" : $("#cbxMenu").val()},
-            function(data)
-            {
-                var submenu = data.datas;
-                var cbx;
+        var nivel2 = $("#nivel-2").prop("checked");
 
-                cbx = '<select id="cbxSubmenu" name="cbxSubmenu" class="form-control">';
-                cbx+= ' <option value="0">Selecione o Submenu</option>';
-                for (i=0; i<submenu.length; i++) 
+        if(nivel2)
+        {
+            var url = BaseUrl + '/admin/menus/cbxSubmenus';
+            $.post(
+                url,
+                {"idMenu" : $("#cbxMenu").val()},
+                function(data)
                 {
-                    cbx+= ' <option value="'+submenu[i].id+'">'+submenu[i].submenu+'</option>';
-                };
-                cbx+= '</select>';
+                    var submenu = data.datas;
+                    var cbx;
 
-                $("#divSubmenu").html(cbx);
-            },
-            'json'
-        ).fail(function(){
-            var alert;
-            alert = '<div id="alerts" class="alert alert-warning">';
-            alert+= '<strong><i class="glyphicon glyphicon-info-sign"></i> Atenção!</strong> ';
-            alert+= 'Houve falha ao listar os submenus.';
-            alert+= '</div>';
-            $("#alerts").html(alert);
-            setTimeout(function(){
-                $("#alerts").hide("slow");
-                $("#alerts").html("");
-                $("#alerts").show();
-            }, 3000);
-        });
+                    cbx = '<select id="cbxSubmenu" name="cbxSubmenu" class="form-control">';
+                    cbx+= ' <option value="0">Selecione o Submenu</option>';
+                    for (i=0; i<submenu.length; i++) 
+                    {
+                        cbx+= ' <option value="'+submenu[i].id+'">'+submenu[i].submenu+'</option>';
+                    };
+                    cbx+= '</select>';
+
+                    $("#divSubmenu").html(cbx);
+                },
+                'json'
+            ).fail(function(){
+                var alert;
+                alert = '<div id="alerts" class="alert alert-warning">';
+                alert+= '<strong><i class="glyphicon glyphicon-info-sign"></i> Atenção!</strong> ';
+                alert+= 'Houve falha ao listar os submenus.';
+                alert+= '</div>';
+                $("#alerts").html(alert);
+                setTimeout(function(){
+                    $("#alerts").hide("slow");
+                    $("#alerts").html("");
+                    $("#alerts").show();
+                }, 3000);
+            });
+        }
     });
 
     // ################ Fim da modificação dos campos. ##################
