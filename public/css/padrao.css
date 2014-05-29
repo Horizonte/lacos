@@ -1,12 +1,60 @@
 .clear{ clear: both; }
 .posicaoLogo{ margin-top: -16px; }
+.page-header{ border-bottom: 1px solid #CCCCCC; }
+.shadowMain{
+    -webkit-box-shadow: 7px 7px 15px 0px rgba(50, 50, 50, 0.6);
+    -moz-box-shadow:    7px 7px 15px 0px rgba(50, 50, 50, 0.6);
+    box-shadow:         7px 7px 15px 0px rgba(50, 50, 50, 0.6);
+    blackground-color:#EEEEEE;
+}
+.box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 3px;
+    border-top: 2px solid #C1C1C1;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+.box.box-solid {
+    border-top: 0 none;
+}
+.inBox{
+	padding: 7px;
+}
 
 #divHeader
 { 
-    margin-top: -15px; 
-    margin-bottom: 2px;
+    margin-bottom: 13px; 
+    /*margin-bottom: 2px; */
+    padding-left: 5px;
 }
 #btSearch{ cursor: pointer; }
 
 a{ cursor: pointer; }
-.page-header{ border-bottom: 1px solid #CCCCCC; }
+
+body{ color: #444444; }
+
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}

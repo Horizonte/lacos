@@ -39,25 +39,66 @@ class MenusController extends \BaseController {
 	{
 		header('Content-type: text/json');
 		header('Content-Type: application/json; charset=UTF8');
-		$validation = new MenuValidator();
 
-		if ($validation->passes())
+		$success = true;
+		$message = null;
+
+		if(Input::get('dir') != '0')
 		{
 			$menus = new Menus();
-			$menus->menu = Input::get('menu');
 			$menus->route = (Input::get('route') != '') ? Input::get('route') : '#';
 			$menus->active = (Input::get('active') != null) ? Input::get('active') : 0;
 			$menus->dir = Input::get('dir');
-			$menus->save();
 
-			$dataReturn = array('success' => true);
-			echo json_encode($dataReturn);
-			exit();
+			switch (Input::get('nivel')) 
+			{
+				case '0': // Insert a new menu
+					
+					$menus->menu = Input::get('menu');
+					$menus->save();
+					$success = true;
+
+					break;
+				
+				case '1': // Insert a new submenu
+					
+					if(strlen(trim(Input::get('submenu'))) == 0)
+					{  
+						$success = false;
+						$message = '<strong>Atenção!</strong> Informe o submenu.';
+						break;
+					}
+					if(Input::get('cbxMenu') == 0)
+					{
+						$success = false;
+						$message = '<strong>Atenção!</strong> Informe o menu.';
+						break;
+					}
+					$menus->submenu = Input::get('submenu');
+					$menus->id = Input::get('cbxMenu');
+					$menus->insertSubmenu();
+					$success = true;
+
+					break;
+				
+				case '2': // Insert a new sub-submenu
+					
+					$menus->submenu = Input::get('subsubmenu');
+					$menus->submenu_id = Input::get('cbxSubmenu');
+					$menus->insertSubSubmenu();
+					$success = true;
+
+					break;
+			}
 		}
-		$message = array('Menu não cadastrado');
-		$errors = json_decode($validation->errors);
-		foreach ($errors as $key => $value){ $message = $value; }
-		$dataReturn = array('false' => true, 'msg' => '<strong>Atenção!</strong> '.$message[0]);
+		else
+		{
+			$success = false;
+			$message = '<strong>Atenção!</strong> Informe o diretório.';
+		}
+		
+		$dataReturn = array('success' => $success, 'msg' => $message);	
+
 		echo json_encode($dataReturn);
 		exit();
 	}
@@ -186,5 +227,37 @@ class MenusController extends \BaseController {
 		$menus = new Menus();
 		$menus->menu = (isset($_POST['txtSearch'])) ? $_POST['txtSearch'] : '';
         return View::make('admin.menus.index')->with('menus', $menus->getMenusList());
+	}
+
+	public function cbxMenus()
+	{
+        header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
+
+		$menus = new Menus();
+		$rs = $menus->getMenusCombobox();
+
+		$dataReturn = array('success' => true, 'datas' => $rs);
+		echo json_encode($dataReturn);
+		exit();
+	}
+
+	public function cbxSubMenus()
+	{
+        header('Content-type: text/json');
+		header('Content-Type: application/json; charset=UTF8');
+
+		$menus = new Menus();
+		$menus->id = (isset($_POST['idMenu'])) ? $_POST['idMenu'] : 0;
+		$rs = $menus->getSubMenusCombobox();
+
+		$dataReturn = array('success' => true, 'datas' => $rs);
+		echo json_encode($dataReturn);
+		exit();
+	}
+
+	public function filter()
+	{
+        return View::make('admin.menus.filter');
 	}
 }

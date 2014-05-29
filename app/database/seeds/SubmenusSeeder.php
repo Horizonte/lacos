@@ -7,8 +7,24 @@ class SubmenusSeeder extends Seeder
 		DB::table('submenus')->delete();
 
 		$submenus = array(
-			array('submenu' => 'Grupos', 'route' => 'groups.index', 'active' => 1, 'dir' => 'admin/groups', 'menu_id' => 1),
-			array('submenu' => 'Usuários', 'route' => 'users.index', 'active' => 1, 'dir' => 'admin/users', 'menu_id' => 1),
+			array(
+					'submenu' 		=> 'Grupos', 
+					'route' 		=> 'groups.index', 
+					'active'		=> 1, 
+					'dir' 			=> 'admin', 
+					'menu_id' 		=> 1, 
+					'created_at' 	=> date("Y-m-d H:i:s"),
+					'updated_at' 	=> date("Y-m-d H:i:s")
+				),
+			array(
+					'submenu' 		=> 'Usuários', 
+					'route'			=> 'users.index', 
+					'active' 		=> 1, 
+					'dir' 			=> 'admin', 
+					'menu_id' 		=> 1, 
+					'created_at' 	=> date("Y-m-d H:i:s"),
+					'updated_at' 	=> date("Y-m-d H:i:s")
+				),
 		);
 
 		DB::table('submenus')->insert($submenus);

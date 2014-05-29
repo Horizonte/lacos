@@ -7,7 +7,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
 					<li><a href="#"><i class="glyphicon glyphicon-info-sign"></i>  Sobre</a></li>
 					<li><a href="#"><i class="glyphicon glyphicon-earphone"></i> Contato</a></li>
 				</ul>
@@ -23,7 +23,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="{{{ URL::route('admin.homeIn') }}}"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+					<li><a href="{{{ URL::route('admin.homeIn') }}}"><i class="glyphicon glyphicon-home"></i> Home</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-wrench"></i> Administração <span class="caret"></span></a>
 						<ul class="dropdown-menu">
