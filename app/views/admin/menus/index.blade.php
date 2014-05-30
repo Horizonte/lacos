@@ -26,18 +26,20 @@
 	            <div class="panel-heading">
 	                <!-- <h3 class="panel-title">Menus</h3> -->
 	                <div class="btn-group">
-					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-					    Action <span class="caret"></span>
+					  <button id="drpSelect" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+					    Menus <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="#">Action</a></li>
-					    <li><a href="#">Another action</a></li>
-					    <li><a href="#">Something else here</a></li>
+					    <li><a id="drpMenus" href="#">Menus</a></li>
+					    <li><a id="drpSubmenus" href="#">Submenus</a></li>
+					    <li><a id="drpSubSubmenus" href="#">Something else here</a></li>
 					  </ul>
 					</div>
-	                <div class="pull-right">
-	                    <button class="btn btn-default btn-xs btn-filter" onclick="Menus.ShowFilter();"><span class="glyphicon glyphicon-filter"></span> Filtro</button>
+	                <div style="float: right;">
+	                    <button class="btn btn-primary btn-xs btn-filter" onclick="Menus.ShowFilter();"><span class="glyphicon glyphicon-filter"></span> Filtro</button>&nbsp;&nbsp;
+	                    <button id="btRefresh" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-refresh"></i></button>
 	                </div>
+	                <div class="clear"></div>
 	            </div>
 	            <table class="table">
 	                <thead>
@@ -70,5 +72,16 @@
 		</div>
     </div>
     <div id="otherViews"></div>
+
+    <input type="hidden" id="hdNivel" name="hdNivel" value="0" />
+    <input type="hidden" id="hdMenu" name="hdMenu" value="" />
+    <input type="hidden" id="hdSubmenu" name="hdSubmenu" value="" />
+    <input type="hidden" id="hdSubSubmenu" name="hdSubSubmenu" value="" />
+    <input type="hidden" id="hdIdMenu" name="hdIdMenu" value="0" />
+    <input type="hidden" id="hdIdSubmenu" name="hdIdSubmenu" value="0" />
+    <input type="hidden" id="hdIdSubSubmenu" name="hdIdSubSubmenu" value="0" />
+    <input type="hidden" id="hdPeriodoDe" name="hdPeriodoDe" value="0" />
+    <input type="hidden" id="hdPeriodoAte" name="hdPeriodoAte" value="0" />
+    <input type="hidden" id="hdStatus" name="hdStatus" value="" />
 	
 @stop

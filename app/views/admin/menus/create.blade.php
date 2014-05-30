@@ -13,7 +13,6 @@
 				<div id="alerts"></div>
 				<form id="addMenu" name="addMenu" class="form-horizontal">
 					<fieldset>
-						<!-- Multiple Radios (inline) -->
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="nivel">Nível</label>
 							<div class="col-md-6"> 
@@ -28,48 +27,36 @@
 								</label>
 							</div>
 						</div>
-
-						<!-- Text input-->
 						<div id="cmpMenu" class="form-group">
 							<label class="col-md-2 control-label" for="name">Menu</label>  
 							<div id="divMenu" class="col-md-6">
 								<input id="menu" name="menu" type="text" placeholder="" class="form-control input-md" required="">
 							</div>
 						</div>
-
-						<!-- Text input-->
 						<div id="cmpSubmenu" class="form-group" display="none">
 							<label class="col-md-2 control-label" for="name">Submenu</label>  
 							<div id="divSubmenu" class="col-md-6">
 								<input id="submenu" name="submenu" type="text" placeholder="" class="form-control input-md" required="">
 							</div>
 						</div>
-
-						<!-- Text input-->
 						<div id="cmpSubsubmenu" class="form-group" display="block">
 							<label class="col-md-2 control-label" for="name">Sub-Submenu</label>  
 							<div id="divSubsubmenu" class="col-md-6">
 								<input id="subsubmenu" name="subsubmenu" type="text" placeholder="" class="form-control input-md" required="">
 							</div>
 						</div>
-
-						<!-- Text input-->
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="name">Rota</label>  
 							<div id="divRota" class="col-md-6">
 								<input id="route" name="route" type="text" placeholder="" class="form-control input-md" required="" value="#">
 							</div>
 						</div>
-						
-						<!-- Multiple Checkboxes (inline) -->
 						<div id="divAtivo" class="form-group">
 							<label class="col-md-2 control-label" for="chActive">Ativo</label>
 							<div class="col-md-6">
 								<input type="checkbox" name="active" id="active-0" value="1">
 							</div>
 						</div>
-
-						<!-- Select Basic -->
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="cbxDir">Diretório</label>
 							<div id="divDiretorio" class="col-md-2">
@@ -80,8 +67,6 @@
 								</select>
 							</div>
 						</div>
-
-						<!-- Button (Double) -->
 						<div class="form-group">
 							<label class="col-md-4 control-label" for="btSave"></label>
 							<div class="col-md-4">

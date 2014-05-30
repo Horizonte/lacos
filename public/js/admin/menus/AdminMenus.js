@@ -293,6 +293,45 @@ function AdminMenus()
         return false;
     }
 
+    function InicializaFiltros()
+    {     
+        $("#hdNivel").val(0);
+        $("#hdMenu").val('');
+        $("#hdSubmenu").val('');
+        $("#hdSubSubmenu").val('');
+        $("#hdIdMenu").val(0);
+        $("#hdIdSubmenu").val(0);
+        $("#hdIdSubSubmenu").val(0);
+        $("#hdPeriodoDe").val('');
+        $("#hdPeriodoAte").val('');
+        $("#hdStatus").val('');
+    }
+
+    $(document).on("click", "#drpMenus", function(event){
+        var drpMenus = $("#drpMenus").html();
+        InicializaFiltros();
+        $("#hdNivel").val(0);
+        $("#drpSelect").html(drpMenus+' <span class="caret">');
+    });
+
+    $(document).on("click", "#drpSubmenus", function(event){
+        var drpSubmenus = $("#drpSubmenus").html();
+        InicializaFiltros();
+        $("#hdNivel").val(1);
+        $("#drpSelect").html(drpSubmenus+' <span class="caret">');
+    });
+
+    $(document).on("click", "#drpSubSubmenus", function(event){
+        var drpSubSubmenus = $("#drpSubSubmenus").html();
+        InicializaFiltros();
+        $("#hdNivel").val(2);
+        $("#drpSelect").html(drpSubSubmenus+' <span class="caret">');
+    });
+
+    $(document).on("click", "#btRefresh", function(event){
+        location.reload(true);
+    });
+
     $(document).on("submit", "#addMenu", function(event)
     {
         event.preventDefault();
