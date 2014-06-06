@@ -10,21 +10,8 @@
 		</div>
 		<div>
 			@include('admin._partials.notifications')
-            <!-- <div class="form-group">
-            	&nbsp;&nbsp;
-				<label class="radio-inline" for="nivel-0">
-					<input type="radio" name="nivel" id="nivel-0" value="0" checked="checked">Menu
-				</label> 
-				<label class="radio-inline" for="nivel-1">
-					<input type="radio" name="nivel" id="nivel-1" value="1">Submenu
-				</label> 
-				<label class="radio-inline" for="nivel-2">
-					<input type="radio" name="nivel" id="nivel-2" value="2">Sub-submenu
-				</label>
-			</div> -->
 	        <div class="panel panel-primary filterable">
 	            <div class="panel-heading">
-	                <!-- <h3 class="panel-title">Menus</h3> -->
 	                <div class="btn-group">
 					  <button id="drpSelect" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
 					    Menus <span class="caret"></span>
@@ -32,7 +19,7 @@
 					  <ul class="dropdown-menu" role="menu">
 					    <li><a id="drpMenus" href="#">Menus</a></li>
 					    <li><a id="drpSubmenus" href="#">Submenus</a></li>
-					    <li><a id="drpSubSubmenus" href="#">Something else here</a></li>
+					    <li><a id="drpSubSubmenus" href="#">Sub-Submenus</a></li>
 					  </ul>
 					</div>
 	                <div style="float: right;">
@@ -82,6 +69,6 @@
     <input type="hidden" id="hdIdSubSubmenu" name="hdIdSubSubmenu" value="0" />
     <input type="hidden" id="hdPeriodoDe" name="hdPeriodoDe" value="0" />
     <input type="hidden" id="hdPeriodoAte" name="hdPeriodoAte" value="0" />
-    <input type="hidden" id="hdStatus" name="hdStatus" value="" />
-	
+    <input type="hidden" id="hdStatus" name="hdStatus" value="" />	
+
 @stop
