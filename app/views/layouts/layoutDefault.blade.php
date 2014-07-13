@@ -14,6 +14,8 @@
     {{ HTML::style('bootstrap-3.1.1/dist/css/bootstrap-theme.min.css') }}
     @if(!Sentry::check()){{ HTML::style('bootstrap-3.1.1/dist/css/signin/signin.css') }} @endif
     {{ HTML::style('bootstrap-3.1.1/dist/css/navbar-fixed-top/navbar-fixed-top.css') }}
+    {{ HTML::style('bootstrap-3.1.1/css/font-awesome.min.css') }}
+    {{ HTML::style('bootstrap-3.1.1/css/ionicons.min.css') }}
     {{ HTML::style('css/padrao.css') }}
 </head>
 <body>	

@@ -39,6 +39,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth.admin'), function()
     Route::get('menus/destroy',     array('as' => 'menus.delete',       'uses' => 'App\Controllers\Admin\MenusController@delete'));
     Route::post('menus/destroy',    array('as' => 'menus.destroy',      'uses' => 'App\Controllers\Admin\MenusController@destroy'));
     Route::get('menus/show',        array('as' => 'menus.show',         'uses' => 'App\Controllers\Admin\MenusController@show'));
+    Route::get('menus/filter',      array('as' => 'menus.filter',       'uses' => 'App\Controllers\Admin\MenusController@filter'));
 
     // ######## Users
     Route::get('users',				array('as' => 'users.index',		'uses' => 'App\Controllers\Admin\UsersController@index'));

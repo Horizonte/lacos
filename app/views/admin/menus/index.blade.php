@@ -2,54 +2,40 @@
 
 @section('contentMenus')	
 	
-	<div id="listMenu" class='container'>
-		<div id="divHeader" class="page-header">
-			<div style="float:left"><h2>Menus</h2></div>
+	<div id="listMenu" class='container shadowMain'>
+		<div id="divHeader">
+			<div style="float:left"><h3>Menus</h3></div>
 			<div style="float:right; margin-top:21px;">@include('admin.menus.submenu')</div>
 			<div class="clear"></div>
 		</div>
 		<div>
 			@include('admin._partials.notifications')
-			<br />
-			<form id="listMenus" name="listMenus" class="form-horizontal">
-				<fieldset>
-					<!-- Appended Input -->
-					<div class="form-group">
-						<div class="col-md-6">
-							<label class="radio-inline" for="nivelSearch-0">
-								<input type="radio" name="nivelSearch" id="nivelSearch-0" value="0" checked="checked">Menu
-							</label> 
-							<label class="radio-inline" for="nivelSearch-1">
-								<input type="radio" name="nivelSearch" id="nivelSearch-1" value="1">Submenu
-							</label> 
-							<label class="radio-inline" for="nivelSearch-2">
-								<input type="radio" name="nivelSearch" id="nivelSearch-2" value="2">Sub-submenu
-							</label>
-						</div>
-						<div class="col-md-6">
-							<div class="input-group">
-								<input type="text" id="txtSearch" name="txtSearch" class="form-control" placeholder="Pesquisar">
-								<buttom type="submit" id="btSearch" name="btSearch" class="input-group-addon" form="listMenu"><i class="glyphicon glyphicon-search"></i></buttom>
-							</div>
-						</div>
-					</div>						
-				</fieldset>
-			</form>
 	        <div class="panel panel-primary filterable">
 	            <div class="panel-heading">
-	                <h3 class="panel-title">Menus</h3>
-	                <div class="pull-right">
-	                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filtro</button>
+	                <div class="btn-group">
+					  <button id="drpSelect" type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+					    Menus <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					    <li><a id="drpMenus" href="#">Menus</a></li>
+					    <li><a id="drpSubmenus" href="#">Submenus</a></li>
+					    <li><a id="drpSubSubmenus" href="#">Sub-Submenus</a></li>
+					  </ul>
+					</div>
+	                <div style="float: right;">
+	                    <button class="btn btn-primary btn-xs btn-filter" onclick="Menus.ShowFilter();"><span class="glyphicon glyphicon-filter"></span> Filtro</button>&nbsp;&nbsp;
+	                    <button id="btRefresh" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-refresh"></i></button>
 	                </div>
+	                <div class="clear"></div>
 	            </div>
 	            <table class="table">
 	                <thead>
 	                    <tr class="filters">
 	                        <th>Código</th>
-	                        <th><input type="text" class="form-control" placeholder="Menu" disabled></th>
-	                        <th><input type="text" class="form-control" placeholder="Rota" disabled></th>
-	                        <th><input type="text" class="form-control" placeholder="Ativo" disabled></th>
-	                        <th><input type="text" class="form-control" placeholder="Criado em" disabled></th>
+	                        <th>Menu</th>
+	                        <th>Rota</th>
+	                        <th>Ativo</th>
+	                        <th>Criado em</th>
 	                        <th>Editar</th>
 	                        <th>Excluir</th>
 	                    </tr>
@@ -57,21 +43,32 @@
 	                <tbody>
 	                    @foreach ($menus as $menu)
 							<tr>
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->id }}}</a></td>
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->menu }}}</a></td>			
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $menu->route }}}</a></td>			
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ $confirm = ($menu->active == 1) ? 'Sim' : 'Não' }}}</a></td>			
-								<td><a onclick="Groups.ShowData({{{ $menu->id }}});">{{{ date('d/m/Y H:i:s', strtotime($menu->created_at)) }}}</a></td>
-								<td><p><button onclick="Groups.ShowEdit({{{ $menu->id }}});" class="btn btn-primary btn-xs" data-title="Edit" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-    							<td><p><button onclick="Groups.ShowDelete({{{ $menu->id }}});" class="btn btn-danger btn-xs" data-title="Delete" data-placement="top"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+								<td><a onclick="Menus.ShowData({{{ $menu->id }}});">{{{ $menu->id }}}</a></td>
+								<td><a onclick="Menus.ShowData({{{ $menu->id }}});">{{{ $menu->menu }}}</a></td>			
+								<td><a onclick="Menus.ShowData({{{ $menu->id }}});">{{{ $menu->route }}}</a></td>			
+								<td><a onclick="Menus.ShowData({{{ $menu->id }}});">{{{ $confirm = ($menu->active == 1) ? 'Sim' : 'Não' }}}</a></td>			
+								<td><a onclick="Menus.ShowData({{{ $menu->id }}});">{{{ date('d/m/Y H:i:s', strtotime($menu->created_at)) }}}</a></td>
+								<td><p><button onclick="Menus.ShowEdit({{{ $menu->id }}});" class="btn btn-primary btn-xs" data-title="Edit" data-placement="top"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    							<td><p><button onclick="Menus.ShowDelete({{{ $menu->id }}});" class="btn btn-danger btn-xs" data-title="Delete" data-placement="top"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 							</tr>
 						@endforeach
 	                </tbody>
 	            </table>
 	        </div>
 			<div align="center">{{$menus->links()}}</div>
-	    </div>
+		</div>
     </div>
     <div id="otherViews"></div>
-	
+
+    <input type="hidden" id="hdNivel" name="hdNivel" value="0" />
+    <input type="hidden" id="hdMenu" name="hdMenu" value="" />
+    <input type="hidden" id="hdSubmenu" name="hdSubmenu" value="" />
+    <input type="hidden" id="hdSubSubmenu" name="hdSubSubmenu" value="" />
+    <input type="hidden" id="hdIdMenu" name="hdIdMenu" value="0" />
+    <input type="hidden" id="hdIdSubmenu" name="hdIdSubmenu" value="0" />
+    <input type="hidden" id="hdIdSubSubmenu" name="hdIdSubSubmenu" value="0" />
+    <input type="hidden" id="hdPeriodoDe" name="hdPeriodoDe" value="0" />
+    <input type="hidden" id="hdPeriodoAte" name="hdPeriodoAte" value="0" />
+    <input type="hidden" id="hdStatus" name="hdStatus" value="" />	
+
 @stop

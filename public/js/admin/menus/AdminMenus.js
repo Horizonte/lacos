@@ -1,7 +1,3 @@
-/*
-Please consider that the JS part isn't production ready at all, I just code it to show the concept of merging filters and titles together !
-*/
-
 var menu = '';
 
 function AdminMenus()
@@ -78,14 +74,16 @@ function AdminMenus()
 
     // ################ Modificação de campos no form create. ##################
 
-    $(document).on("change", "#nivel-0", function(event){
+    function CarregaCamposNivel0()
+    {
         var textMenu = '<input id="menu" name="menu" type="text" placeholder="" class="form-control input-md" required="">';
         $("#divMenu").html(textMenu);
         $("#cmpSubmenu").hide();
         $("#cmpSubsubmenu").hide();
-    });
+    }
 
-    $(document).on("change", "#nivel-1", function(event){    
+    function CarregaCamposNivel1()
+    {
         var url = BaseUrl + '/admin/menus/cbxMenus';
         $.post(
             url,
@@ -126,9 +124,10 @@ function AdminMenus()
             }, 3000);
             location.href = '/admin/menus/create';
         });
-    });
+    }
 
-    $(document).on("change", "#nivel-2", function(event){
+    function CarregaCamposNivel2()
+    {
         var url = BaseUrl + '/admin/menus/cbxMenus';
         $.post(
             url,
@@ -205,6 +204,18 @@ function AdminMenus()
             }, 3000);
             location.href = '/admin/menus/create';
         });
+    }
+
+    $(document).on("change", "#nivel-0", function(event){
+        CarregaCamposNivel0();
+    });
+
+    $(document).on("change", "#nivel-1", function(event){    
+        CarregaCamposNivel1();
+    });
+
+    $(document).on("change", "#nivel-2", function(event){
+        CarregaCamposNivel2();
     });
 
     $(document).on("change", "#cbxMenu", function(event){
@@ -253,18 +264,18 @@ function AdminMenus()
     var url_ =  $(location).attr('pathname');
     
     if(url_ == '/admin/menus/create')
-    {  
+    {
         $("#submenu li").toggleClass( 'active', false );
         $("#create").toggleClass( 'active', true );
     }
     else
-    {  
+    {
         $("#submenu li").toggleClass( 'active', false );
         $("#menus").toggleClass( 'active', true );
     }
 
     function RecordMenu()
-    {       
+    {
         var url = BaseUrl + '/admin/menus/create';
         var dir = $("#dir").val();
         $.blockUI({ message: 'Aguarde...' });
@@ -307,7 +318,7 @@ function AdminMenus()
     };
 
     function UpdateMenu()
-    {       
+    {
         var url = BaseUrl + '/admin/menus/edit';
         $("#divModal").block({ message: 'Aguarde...' });
         $.post(
@@ -334,7 +345,7 @@ function AdminMenus()
     };
 
     function DeleteMenu()
-    {       
+    {
         var url = BaseUrl + '/admin/menus/destroy';
         $("#divModal").block({ message: 'Aguarde...' });
         $.post(
@@ -367,6 +378,45 @@ function AdminMenus()
         $('body').load(url, $("#listMenus").serialize(), function(){ $.unblockUI(); });
         return false;
     }
+
+    function InicializaFiltros()
+    {
+        $("#hdNivel").val(0);
+        $("#hdMenu").val('');
+        $("#hdSubmenu").val('');
+        $("#hdSubSubmenu").val('');
+        $("#hdIdMenu").val(0);
+        $("#hdIdSubmenu").val(0);
+        $("#hdIdSubSubmenu").val(0);
+        $("#hdPeriodoDe").val('');
+        $("#hdPeriodoAte").val('');
+        $("#hdStatus").val('');
+    }
+
+    $(document).on("click", "#drpMenus", function(event){
+        var drpMenus = $("#drpMenus").html();
+        InicializaFiltros();
+        $("#hdNivel").val(0);
+        $("#drpSelect").html(drpMenus+' <span class="caret">');
+    });
+
+    $(document).on("click", "#drpSubmenus", function(event){
+        var drpSubmenus = $("#drpSubmenus").html();
+        InicializaFiltros();
+        $("#hdNivel").val(1);
+        $("#drpSelect").html(drpSubmenus+' <span class="caret">');
+    });
+
+    $(document).on("click", "#drpSubSubmenus", function(event){
+        var drpSubSubmenus = $("#drpSubSubmenus").html();
+        InicializaFiltros();
+        $("#hdNivel").val(2);
+        $("#drpSelect").html(drpSubSubmenus+' <span class="caret">');
+    });
+
+    $(document).on("click", "#btRefresh", function(event){
+        location.reload(true);
+    });
 
     $(document).on("submit", "#addMenu", function(event)
     {
@@ -413,26 +463,65 @@ function AdminMenus()
     }
 
     var ShowEdit = function ModalEdit(id)
-    { 
+    {
         href = BaseUrl + '/admin/menus/edit?id='+id;
         LoadOtherViewsModal(href);
     };
 
     var ShowDelete = function ModalDelete(id)
-    { 
+    {
         href = BaseUrl + '/admin/menus/destroy?id='+id;
         LoadOtherViewsModal(href);
     };
 
     var ShowData = function ModalShow(id)
-    { 
+    {
         href = BaseUrl + '/admin/menus/show?id='+id;
         LoadOtherViewsModal(href);
     };
 
+    var ShowFilter = function ModalFilter()
+    {
+        href = BaseUrl + '/admin/menus/filter';
+        $('#otherViews').load(href, function()
+        {
+            var nivel = $("#hdNivel").val();
+            if(nivel == 0)
+            { 
+                $('#nivel-0').attr('checked', true); 
+                CarregaCamposNivel0();
+            }
+            else if(nivel == 1)
+            { 
+                $('#nivel-1').attr('checked', true); 
+                CarregaCamposNivel1();
+            }
+            else if(nivel == 2)
+            { 
+                $('#nivel-2').attr('checked', true); 
+                CarregaCamposNivel2();
+            }
+            $('#divModal').modal();
+        });
+    };
+
+    $(document).on('click', "#btClearFilter", function(event)
+    {
+        var nivel = $("#hdNivel").val();
+
+        try{ $('#menu').val(''); }catch(err){ }
+        try{ $('#cbxMenu').val('0'); }catch(err){ }
+        try{ $('#submenu').val(''); }catch(err){ }
+        try{ $('#cbxSubmenu').val(''); }catch(err){ }
+        try{ $('#subsubmenu').val(''); }catch(err){ }
+        try{ $('#status').val('-1'); }catch(err){ }
+        try{ $('#dir').val('0'); }catch(err){ }
+    });
+
     Menus = {
         "ShowEdit"   : ShowEdit,
         "ShowDelete" : ShowDelete,
-        "ShowData"   : ShowData
+        "ShowData"   : ShowData,
+        "ShowFilter" : ShowFilter
     };
 }

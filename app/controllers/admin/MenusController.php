@@ -255,4 +255,9 @@ class MenusController extends \BaseController {
 		echo json_encode($dataReturn);
 		exit();
 	}
+
+	public function filter()
+	{
+        return View::make('admin.menus.filter');
+	}
 }
