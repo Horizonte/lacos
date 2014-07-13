@@ -15,7 +15,17 @@
 				<fieldset>
 					<!-- Appended Input -->
 					<div class="form-group">
-						<div class="col-md-6"></div>
+						<div class="col-md-6">
+							<label class="radio-inline" for="nivelSearch-0">
+								<input type="radio" name="nivelSearch" id="nivelSearch-0" value="0" checked="checked">Menu
+							</label> 
+							<label class="radio-inline" for="nivelSearch-1">
+								<input type="radio" name="nivelSearch" id="nivelSearch-1" value="1">Submenu
+							</label> 
+							<label class="radio-inline" for="nivelSearch-2">
+								<input type="radio" name="nivelSearch" id="nivelSearch-2" value="2">Sub-submenu
+							</label>
+						</div>
 						<div class="col-md-6">
 							<div class="input-group">
 								<input type="text" id="txtSearch" name="txtSearch" class="form-control" placeholder="Pesquisar">

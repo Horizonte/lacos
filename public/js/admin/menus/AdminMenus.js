@@ -54,7 +54,29 @@ function AdminMenus()
         }
     });
 
-    // ################ Modificação de campos no form. ##################
+    // ################ Modificação de campos no form index. ##################
+
+    $(document).on("change", "#nivelSearch-0", function(event){
+        console.log('search 0');
+        event.preventDefault();
+        ListMenus();
+    });
+
+    $(document).on("change", "#nivelSearch-1", function(event){    
+        console.log('search 1');
+        event.preventDefault();
+        //ListMenus();
+    });
+
+    $(document).on("change", "#nivelSearch-2", function(event){
+        console.log('search 2');
+        event.preventDefault();
+        //ListMenus();
+    });
+
+    // #################### Fim da modificação dos campos. #####################
+
+    // ################ Modificação de campos no form create. ##################
 
     $(document).on("change", "#nivel-0", function(event){
         var textMenu = '<input id="menu" name="menu" type="text" placeholder="" class="form-control input-md" required="">';
@@ -226,7 +248,7 @@ function AdminMenus()
         }
     });
 
-    // ################ Fim da modificação dos campos. ##################
+    // #################### Fim da modificação dos campos. #####################
 
     var url_ =  $(location).attr('pathname');
     
@@ -244,12 +266,9 @@ function AdminMenus()
     function RecordMenu()
     {       
         var url = BaseUrl + '/admin/menus/create';
-        var menu = $("#menu").val();
-        var route = $("#route").val();
-        var active = $("#active").val();
         var dir = $("#dir").val();
         $.blockUI({ message: 'Aguarde...' });
-        if(menu != '' && dir != '0')
+        if(dir != '0')
         {
             setTimeout(function()
             {
@@ -277,8 +296,12 @@ function AdminMenus()
         else
         {
             $.blockUI({ message: 'O cadastro não foi realizado.' });
-            if(menu == ''){ $("#alerts").html('<div id="alerts" class="alert alert-danger">Informe o menu</div>'); }
-            else if(dir == '0'){ $("#alerts").html('<div id="alerts" class="alert alert-danger">Informe o diretório</div>'); }            
+            var alert;
+            alert = '<div id="alerts" class="alert alert-danger">';
+            alert+= '<strong><i class="glyphicon glyphicon-remove-sign"></i> Atenção!</strong> ';
+            alert+= 'Informe o diretório.';
+            alert+= '</div>';
+            $("#alerts").html(alert);          
             setTimeout($.unblockUI, 2000);
         }
     };
