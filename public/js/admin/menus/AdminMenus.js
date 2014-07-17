@@ -379,6 +379,14 @@ function AdminMenus()
         return false;
     }
 
+    function ListGridMenus(nivel)
+    {
+        var url = BaseUrl + '/admin/menus';
+        $.blockUI({ message: 'Aguarde...' });
+        $('body').load(url, {nivel:nivel}, function(){ $.unblockUI(); });
+        return false;
+    }
+
     function InicializaFiltros()
     {
         $("#hdNivel").val(0);
@@ -398,6 +406,7 @@ function AdminMenus()
         InicializaFiltros();
         $("#hdNivel").val(0);
         $("#drpSelect").html(drpMenus+' <span class="caret">');
+        ListGridMenus('');
     });
 
     $(document).on("click", "#drpSubmenus", function(event){
@@ -405,6 +414,7 @@ function AdminMenus()
         InicializaFiltros();
         $("#hdNivel").val(1);
         $("#drpSelect").html(drpSubmenus+' <span class="caret">');
+        ListGridMenus('sub');
     });
 
     $(document).on("click", "#drpSubSubmenus", function(event){
@@ -412,6 +422,7 @@ function AdminMenus()
         InicializaFiltros();
         $("#hdNivel").val(2);
         $("#drpSelect").html(drpSubSubmenus+' <span class="caret">');
+        ListGridMenus('subsub');
     });
 
     $(document).on("click", "#btRefresh", function(event){

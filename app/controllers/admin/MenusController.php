@@ -15,9 +15,28 @@ class MenusController extends \BaseController {
 	 */
 	public function index()
 	{
-		$menus = new Menus();
-		$menus->menu = (isset($_GET['txtSearch'])) ? $_GET['txtSearch'] : '';
-        return View::make('admin.menus.index')->with('menus', $menus->getMenusList());
+		$nivel 		= (isset($_GET['nivel'])) ? $_GET['nivel'] : '';
+		$txtSearch 	= (isset($_GET['txtSearch'])) ? $_GET['txtSearch'] : '';
+        $return 	= array();
+
+        if($nivel == '') 			
+        { 
+			$menus = new Menus();
+			$menus->menu = $txtSearch;
+        	$return = View::make('admin.menus.index')->with('menus', $menus->getMenusList()); 
+        }
+        elseif ($nivel == 'sub') 	
+        { 
+			$submenus = new Submenus();
+        	$return = View::make('admin.menus.index')->with('submenus', $submenus->getSubmenusList()); 
+        }
+        elseif ($nivel == 'subsub') 
+        { 
+			$subSubmenus = new SubSubmenus();
+        	$return = View::make('admin.menus.index')->with('subSubmenus', $subSubmenus->getSubSubmenusList()); 
+        }
+
+        return $return;
 	}
 
 	/**

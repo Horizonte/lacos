@@ -29,7 +29,7 @@
 	                <div class="clear"></div>
 	            </div>
 	            <table class="table">
-	                <thead>
+	                <thead id="tbHead">
 	                    <tr class="filters">
 	                        <th>Código</th>
 	                        <th>Menu</th>
@@ -40,7 +40,7 @@
 	                        <th>Excluir</th>
 	                    </tr>
 	                </thead>
-	                <tbody>
+	                <tbody id="tbBody">
 	                    @foreach ($menus as $menu)
 							<tr>
 								<td><a onclick="Menus.ShowData({{{ $menu->id }}});">{{{ $menu->id }}}</a></td>
